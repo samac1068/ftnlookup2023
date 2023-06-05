@@ -20,6 +20,8 @@ export class ItapDashComponent implements OnInit {
   itapTimeout: boolean = false;
   itapNoRecords: boolean = true;
 
+  gridStatus: boolean = false;
+
   localTimer: any;
 
   constructor(public ds: DatastoreService, private api: WebapiService, private comm: CommService, private conlog: ConlogService) { }
@@ -104,5 +106,9 @@ export class ItapDashComponent implements OnInit {
     this.itapNoRecords = this.ds.tabs[this.ftn_uic]["ITAP"]["UICS"].length == 0;
     this.itapLoaded = true;
     this.conlog.log("itap has been loaded.");
+  }
+
+  gridClickEvent(){
+    this.gridStatus = !this.gridStatus;
   }
 }

@@ -12,7 +12,6 @@ import {ConlogService} from '../../../modules/conlog/conlog.service';
 export class OrdersDashComponent implements OnInit {
   @Input() ftn_uic: string = "";
 
-  orderHistory: any = [];
   orderStaffing: any = [];
   ordersArr: any = [];
 
@@ -36,8 +35,7 @@ export class OrdersDashComponent implements OnInit {
 
   processOrderRecIDData() {
     if(this.ds.tabs[this.ftn_uic]["ORDERS_RECID"].length == 0) {
-
-      this.api.getOrderRecID(this.ftn_uic).subscribe((results) => {
+      this.api.getOrderRecID(this.ftn_uic, this.ds.tabs[this.ftn_uic].type).subscribe((results) => {
         if (results != null && results.indexOf("Execution Timeout Expired") == -1) {
           this.ds.tabs[this.ftn_uic]["ORDERS_RECID"] = this.ordersArr = results;
 
@@ -86,14 +84,12 @@ export class OrdersDashComponent implements OnInit {
   }
 
   completeTabProcess() {
-    // Update all local variables to be displayed
-    this.orderStaffing = this.ds.tabs[this.ftn_uic]["ORDERS_STAFFING"];
-
-    // Move forward
     this.ordersTabLoaded = this.ds.tabs[this.ftn_uic].ordersTabLoaded = true;
-    this.ordersTimeoutExpired = (this.ds.tabs[this.ftn_uic]["ORDER_RECID"] == "Execution Timeout Expired");
     this.ordersNoRecords = (this.ordersArr.length == 0);
     this.conlog.log("orders has been loaded with " + ((this.ordersNoRecords) ? "no records." : "records."));
+
+    this.orderStaffing = this.ds.tabs[this.ftn_uic]["ORDERS_STAFFING"];
+    this.ordersTimeoutExpired = (this.ds.tabs[this.ftn_uic]["ORDER_RECID"] == "Execution Timeout Expired");
   }
 
   ordersColValueChanged(ind: number, col: string, arr: any): string | undefined {
@@ -105,5 +101,4 @@ export class OrdersDashComponent implements OnInit {
     }
     return "cellNoHighlight";
   }
-
 }

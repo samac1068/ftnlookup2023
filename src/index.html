@@ -12,9 +12,6 @@
     let browserAgent = navigator.userAgent.indexOf("MSIE") > -1 || navigator.userAgent.indexOf("rv:") > -1 || navigator.userAgent.indexOf("Trident") > -1;
     if(browserAgent) window.location.href ="./unsupportedBrowser.html";
   </script>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="mat-typography">
   <script>
@@ -31,11 +28,11 @@
     if(uicStr !== undefined) {
       // Operations for UIC
 	    evalStr(uicStr);
-      jstr = `<app-root uic='${uicStr.substring(0, uicStr.indexOf("&"))}'></app-root>`;
+      jstr = `<app-root uic='${uicStr}'></app-root>`;
     } else if(ftnStr !== undefined) {
       // Operations for FTN
 	    evalStr(ftnStr);
-      jstr = `<app-root ftn='${ftnStr.substr(0, 11)}'></app-root>`;
+      jstr = `<app-root ftn='${ftnStr}'></app-root>`;
     } else
       jstr = "<app-root></app-root>";
 

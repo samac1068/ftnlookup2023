@@ -6,6 +6,7 @@ import { ConfirmDialogService } from './dialogs/confirm-dialog/confirm-dialog.se
 import { MatDialog } from '@angular/material/dialog';
 import { LogConsoleDialogComponent } from './modules/conlog/log-console-dialog/log-console-dialog.component';
 import { ConlogService } from './modules/conlog/conlog.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { ConlogService } from './modules/conlog/conlog.service';
 export class AppComponent {
   title = 'ftnlookup';
   enabled:boolean = false;
-  params: any = [];
+  params: any = {ftn: null, uic: null};
+  inbound: any = {ftn: null, uic: null};
   isConsoleOpen: boolean = false;
   dialogQuery: any;
 
@@ -43,18 +45,31 @@ export class AppComponent {
     }
   }
 
-  constructor(private ds: DatastoreService, private api: WebapiService, private cds: ConfirmDialogService, elRef: ElementRef, private conlog: ConlogService, public dialog: MatDialog) {
+  constructor(private ds: DatastoreService, private api: WebapiService, private cds: ConfirmDialogService, elRef: ElementRef, private conlog:
+    ConlogService,public dialog: MatDialog) {
     // Get any information that is available in the querystring
-    this.params.ftn = !this.validateInBoundData() ? elRef.nativeElement.getAttribute('ftn') : null;
-    this.params.uic = !this.validateInBoundData() ? elRef.nativeElement.getAttribute('uic') : null;
-
-    if(this.params.ftn != null || this.params.uic != null) this.ds.devMode = false;   // Set dev mode to false if anything is passed
-    this.conlog.log("Values coming from QueryRequest - FTN: " + this.params.ftn + " UIC: " + this.params.uic);
+    this.inbound.ftn = elRef.nativeElement.getAttribute('ftn');
+    this.inbound.uic = elRef.nativeElement.getAttribute('uic');
   }
 
   ngOnInit() {
     //During initialization, need to identify which server is hosting the latest API.
     this.conlog.log("ngOnInit - Determine where we are");
+
+    // Validate the provided values.
+    this.conlog.log("Validation Start - InBound FTN is [" + this.inbound.ftn + "] | UIC is [" + this.inbound.uic + "]");
+    if(this.inbound.ftn != null) {
+      this.params.ftn = (this.inbound.ftn.length == 11) ? this.inbound.ftn : null;
+    }
+    if(this.inbound.uic != null) {
+      this.params.uic = (this.inbound.uic.length >= 4 && this.inbound.uic.length <= 6) ? this.inbound.uic : null;
+    }
+
+    this.conlog.log("Validation Complete - PARAMS FTN is [" + this.params.ftn + "] | UIC is [" + this.params.uic + "]");
+
+    // Set the development mode
+    if(this.params.ftn != null || this.params.uic != null) this.ds.devMode = false;   // Set dev mode to false if anything is passed
+    this.conlog.log("Values coming from QueryRequest - FTN: " + this.params.ftn + " UIC: " + this.params.uic);
 
     if (this.ds.getWSAPI() == '') {
       this.getSystemConfig();
@@ -63,7 +78,6 @@ export class AppComponent {
       /*TODO*/
       // During initialization, also need to obtain the authorization token that will be used for all communications (Still not working correctly)
       //this.grabToken();
-
       //this.ds.devMode = true;     // This is for debugging without running locally only
 
       if (this.params.ftn == null && this.params.uic == null && !this.ds.devMode) {
@@ -71,9 +85,9 @@ export class AppComponent {
       } else {
         // Set up for local execution and development only (This is automatically ignored if data is passed to the querystring)
         if (this.params.ftn == null && this.params.uic == null && this.ds.devMode) {
-          //this.params.ftn = 'DEMO1201038';  // DEMO1111782  DEMO1141930  DEMO1201038  DEMO1171444
-          this.params.uic = 'ZPFLAA'; // Z48JAA
-        }
+          this.params.ftn = 'DEMO1201038';  // DEMO1111782  DEMO1141930  DEMO1201038  DEMO1171444
+          //this.params.uic = 'ZPFLAA'; // Z48JAA
+        } else this.ds.devMode = false;
 
         // Are we running locally or on a server?  On a server, then devMode should be false regardless if testing
         this.conlog.log("Dev Mode: " + this.ds.devMode + ", FTN:" + this.params.ftn + ", UIC:" + this.params.uic);
@@ -93,16 +107,6 @@ export class AppComponent {
         alert("FATAL ERROR: Missing critical FTN/UIC data.  Unable to continue.");
       }
     }
-  }
-
-  validateInBoundData():boolean {
-    if(this.params.ftn != null)
-      return (this.params.ftn.length != 11 || (this.params.ftn.toLowerCase().indexOf("0c0") == -1 && !this.ds.devMode));
-
-    if(this.params.uic != null)
-      return ((this.params.uic.length >= 4 && this.params.uic.length <= 6) || (this.params.uic.toLowerCase().indexOf(this.ds.devMode?"z":"w") == -1));
-
-    return false;
   }
 
   getSystemConfig() {
@@ -126,7 +130,7 @@ export class AppComponent {
       },
         error => {
           console.log("Getting error from token grab", error);
-          this.cds.acknowledge('Fatal Error', 'Unable to connect to API. Please verify operation. Program Halted');
+          this.cds.acknowledge('Fatal Error', 'Unable to connect to API. Please verify operation. Program Halted').then(r => {});
           this.ds.apiCommCheckPassed = false;
           this.enabled = false;
           this.conlog.log("Comms Connection Unsuccessful - LKUP");

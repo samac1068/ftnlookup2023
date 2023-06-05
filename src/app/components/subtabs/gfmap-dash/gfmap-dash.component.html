@@ -1,6 +1,6 @@
 <div id="gfmapcontainer" *ngIf="gfmapPodLoaded && !gfmapNoRecords && !gfmapTimeout">
-  <div #gpanel *ngFor="let gfarr of ds.tabs[ftn_uic]['GFMAP']"
-
+  <div *ngFor="let gfarr of ds.tabs[ftn_uic]['GFMAP']" class="gpanel"
+    (click)="gridClickEvent()" [ngClass]=" gridStatus ? 'showChildren' : ''"
   >&nbsp;FTN Line No: {{ gfarr[0].FTN_Line_No}}
     <br/>
     <div class="sub">

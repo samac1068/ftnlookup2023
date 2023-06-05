@@ -166,9 +166,9 @@ export class WebapiService {
       .pipe(catchError(WebapiService.errorHandler)));
   }
 
-  getOrderRecID(ftnuic: string): Observable<any> {
-    let fullDomain: string = this.identifyWSServer() + `/GetOrderRecID`;
-    const params = new HttpParams().set('id', this.ds.getPassKey()).set('ftn', ftnuic);
+  getOrderRecID(ftnuic: string, objtype: string): Observable<any> {
+    let fullDomain: string = this.identifyWSServer() + ((objtype === "ftn") ? `/GetOrderRecID` : `/GetOrdersUIC`);
+    const params = new HttpParams().set('id', this.ds.getPassKey()).set(((objtype === "ftn") ? 'ftn' : 'uic'), ftnuic);
     return (this.http.get<any>(fullDomain, {params})
       .pipe(catchError(WebapiService.errorHandler)));
   }

@@ -20,6 +20,8 @@ export class GfmapDashComponent implements OnInit {
   private gridColumnApi: any ;
   private gridApi: any;
 
+  gridStatus: boolean = false;
+
   constructor(public ds: DatastoreService, private comm: CommService, private api: WebapiService, private conlog: ConlogService) { }
 
   ngOnInit(): void {
@@ -75,5 +77,9 @@ export class GfmapDashComponent implements OnInit {
       this.gfmapNoRecords = (this.ds.tabs[this.ftn_uic]["GFMAP"].length == 0);
       this.conlog.log("gfmap has been loaded with no data");
     }
+  }
+
+  gridClickEvent(){
+    this.gridStatus = !this.gridStatus;
   }
 }
