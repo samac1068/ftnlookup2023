@@ -1,0 +1,50 @@
+body {
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.pgTitle {
+
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.LUTable, .RUTable, .LLTable, .RLTable {
+  float: left;
+  width: 300px;
+}
+
+.LLTable, .RLTable {
+  width: 500px;
+}
+
+.RUTable,.RLTable {
+  margin-left: 50px;
+}
+
+.upperTables, .lowerTables {
+  margin-top: 30px;
+  float: left;
+}
+
+.lowerTables {
+  display: block;
+  clear: left;
+  margin-left: 10px;
+}
+
+.boldLabel {
+  font-weight: bold;
+  color: black;
+}
+
+.boldValue {
+  font-weight: bold;
+  color: #00C;
+}

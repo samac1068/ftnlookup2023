@@ -1,0 +1,46 @@
+.title {
+  font-weight: bold;
+  font-size: 12px;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#reqbody, .btnLink {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.colored {
+  background-color: #42646F;
+  color: white;
+  border: 1px solid gray;
+}
+
+#history table, #history th, #history td {
+  border: 1px solid black;
+}
+
+#history table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td {
+  padding-right: 5px;
+}
+
+tr, td {
+  vertical-align: top;
+}
+
+.grpBorder {
+  border: 1px solid slategray;
+}
+
+.bl_high {
+  color: #0000CC;
+}
+
+.yw_high {
+  color: yellow;
+}

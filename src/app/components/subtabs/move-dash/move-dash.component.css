@@ -1,0 +1,42 @@
+
+.stroke1 {
+  fill: rgba(0, 0, 255, .5);
+  border: 2px solid blue;
+}
+
+.stroke2 {
+  fill: rgba(0, 0, 255, .5);
+  border: 2px solid blue;
+}
+
+.title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cssContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.divChart {
+  display: block;
+  border: 2px solid slategray;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 98%;
+  height: 98%;
+  margin: 5px;
+}
+
+.areaTitle {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

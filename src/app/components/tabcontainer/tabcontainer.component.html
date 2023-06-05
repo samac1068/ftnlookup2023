@@ -1,0 +1,7 @@
+<div id="maincontainer" class="mainBody">
+  <mat-tab-group [selectedIndex]="selected" (selectedIndexChange)="setValue($event)">
+      <mat-tab *ngFor="let tab of tabArr; let index = index" [label]="tab">
+        <app-tabs [ftn_uic]=tab></app-tabs>
+      </mat-tab>
+  </mat-tab-group>
+</div>

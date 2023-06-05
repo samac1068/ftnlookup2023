@@ -1,0 +1,26 @@
+<div id="databar">{{ podLblTxt }}</div>
+<div id="mainContainer" class="mainBody">
+  <mat-tab-group [selectedIndex]="selected" (selectedIndexChange)="setValue($event)" [animationDuration]="tabAnimation">
+    <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.title">
+      <div id="divContent" [ngSwitch]="tab.comp">
+        <app-jcrm-dash *ngSwitchCase="'jcrm-dash'" [ftn_uic]=ftn_uic></app-jcrm-dash>
+        <app-gfmap-dash *ngSwitchCase="'gfmap-dash'" [ftn_uic]=ftn_uic></app-gfmap-dash>
+        <app-orders-dash *ngSwitchCase="'orders-dash'" [ftn_uic]=ftn_uic></app-orders-dash>
+        <app-jopes-dash *ngSwitchCase="'jopes-dash'" [ftn_uic]=ftn_uic></app-jopes-dash>
+        <app-mob-dash *ngSwitchCase="'mob-dash'" [ftn_uic]=ftn_uic></app-mob-dash>
+        <app-ready-dash *ngSwitchCase="'ready-dash'" [ftn_uic]=ftn_uic></app-ready-dash>
+        <app-mdis-dash *ngSwitchCase="'mdis-dash'" [ftn_uic]=ftn_uic></app-mdis-dash>
+        <app-mms-dash *ngSwitchCase="'mms-dash'" [ftn_uic]=ftn_uic></app-mms-dash>
+        <app-rotate-dash *ngSwitchCase="'rotate-dash'" [ftn_uic]=ftn_uic></app-rotate-dash>
+        <app-itap-dash *ngSwitchCase="'itap-dash'" [ftn_uic]=ftn_uic></app-itap-dash>
+        <app-drrsa-dash *ngSwitchCase="'drrsa-dash'" [ftn_uic]=ftn_uic></app-drrsa-dash>
+        <app-fmsweb-dash *ngSwitchCase="'fmsweb-dash'" [ftn_uic]=ftn_uic></app-fmsweb-dash>
+        <app-samas-dash *ngSwitchCase="'samas-dash'" [ftn_uic]=ftn_uic></app-samas-dash>
+        <app-individual-order-dash *ngSwitchCase="'individual-order-dash'" [ftn_uic]=ftn_uic></app-individual-order-dash>
+        <app-aos-dash *ngSwitchCase="'aos-dash'" [ftn_uic]=ftn_uic></app-aos-dash>
+
+        <!-- DO NOT ENABLE THIS YET - SOMETHING ISN'T RIGHT ABOUT IT <app-move-dash *ngSwitchCase="'move-dash'" [ftn_uic]=ftn_uic></app-move-dash>-->
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

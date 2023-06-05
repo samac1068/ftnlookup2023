@@ -1,0 +1,28 @@
+<div id="itapcontainer" *ngIf="itapLoaded && !itapNoRecords && !itapTimeout">
+  <div id="ipanel" #ipanel *ngFor="let itaparr of ds.tabs[ftn_uic]['ITAP']['UICS']"
+       >UIC: {{ itaparr }}
+    <div class="sub">
+      <ag-grid-angular
+        style="width: 100%; height: 100%;"
+        class="ag-theme-alpine"
+        [columnDefs]="ds.columnDefinitions['itap']"
+        [rowData]="ds.tabs[ftn_uic]['ITAP']['DATA'][itaparr]"
+        [headerHeight]="ds.defaultHeaderHt"
+        [rowHeight]="ds.defaultRowHt"
+        [animateRows]="true"></ag-grid-angular>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="itapLoaded && itapNoRecords && !itapTimeout" class="boldText">
+  {{ userOrderInfo }}
+</div>
+
+<div *ngIf="!itapLoaded && !itapTimeout" class="loading">
+  {{ userInfoText }}
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="itapTimeout && itapLoaded" class="boldText">
+  Execution Timeout Expired.
+</div>

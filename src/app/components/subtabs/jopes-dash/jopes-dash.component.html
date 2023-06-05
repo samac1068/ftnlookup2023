@@ -1,0 +1,34 @@
+<mat-accordion class="pgAccord" *ngIf="jopesTabLoaded && !jopesNoRecord && !jopesTimeOut">
+  <mat-expansion-panel *ngFor="let jopesPID of ds.tabs[ftn_uic]['JOPES']['PID_LIST']" expanded="false">
+    <mat-expansion-panel-header [collapsedHeight]="'25px'" [expandedHeight]="'25px'">
+      <mat-panel-title>
+        <span style="color: white"><span style="font-weight: bold; margin-left: 20px;">PID:</span> {{ jopesPID }}</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="dgDiv">
+      <table style="width:100%;">
+        <tr>
+          <th *ngFor="let head of ds.columnDefinitions['jopes'];"><span class="tableHeader">{{ head.headerName }}</span></th>
+        </tr>
+        <tr *ngFor="let row of ds.tabs[ftn_uic]['JOPES']['DATA'][jopesPID]; let i = index" class="rowStyle" >
+          <td class="cellCentered" *ngFor="let col of ds.columnDefinitions['jopes'];">
+            {{ row[col.field] }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div *ngIf="jopesTabLoaded && jopesNoRecord && !jopesTimeOut" class="boldText">
+  No Records Found
+</div>
+
+<div *ngIf="!jopesTabLoaded && !jopesTimeOut" class="loading">
+  Stand-by, Loading JOPES Data!
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="jopesTimeOut && jopesTabLoaded" class="boldText">
+  Execution Timeout Expired.
+</div>

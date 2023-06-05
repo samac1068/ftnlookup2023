@@ -1,0 +1,41 @@
+<div id="accContainer" *ngIf="ordersTabLoaded && !ordersNoRecords">
+  <mat-accordion >
+    <mat-expansion-panel *ngFor="let order of ordersArr" expanded="false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span style="font-weight: bold; margin-left: 20px;">Rec ID:</span> {{ order.REC_ID }} ({{ order.Agency }})
+          <span style="font-weight: bold; margin-left: 20px;">CUR MOD:</span> {{ order.HISTORY[0]["mod"] }}
+          <span style="font-weight: bold; margin-left: 20px;">UIC:</span> {{ order.urf_uic}}
+          <span style="font-weight: bold; margin-left: 20px;">ANAME:</span> {{ order.HISTORY[0]["urf_aname"] }}
+          <span style="font-weight: bold; margin-left: 20px;">LAD:</span> {{ order.HISTORY[0]["user_pid_lad"] }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+        <!-- Insert table here -->
+        <div class="dgDiv">
+          <table class="dataTbl">
+            <tr>
+              <th *ngFor="let head of ds.columnDefinitions['orders'];"><span class="tableHeader">{{ head.headerName }}</span></th>
+            </tr>
+            <tr *ngFor="let row of order.HISTORY; let ri = index;">
+              <td *ngFor="let col of ds.columnDefinitions['orders'];" [ngClass]="ordersColValueChanged(ri, col.field, order.HISTORY)">
+                {{ row[col.field] }}
+              </td>
+            </tr>
+          </table>
+        </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div *ngIf="ordersTabLoaded && ordersNoRecords && !ordersTimeoutExpired" class="boldText">
+  No Records Found
+</div>
+
+<div *ngIf="!ordersTabLoaded && !ordersTimeoutExpired" class="loading">
+  Stand-by, Loading Orders Data!
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="ordersTimeoutExpired && ordersTabLoaded" class="boldText">
+  Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+</div>

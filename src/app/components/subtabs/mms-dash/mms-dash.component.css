@@ -1,0 +1,54 @@
+.mmsTitle, .mmsSubTitle {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.mmsSubTitle {
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.separator {
+  height: 1px;
+  width: 99%;
+  margin-top: 1px;
+  background-color: gray;
+  margin-left: 10px;
+}
+
+.msgContent {
+  margin-left: 10px;
+}
+
+.classMMS {
+  margin-top: 20px;
+  width: 99.5%;
+  max-height: 40vh;
+}
+
+
+.tblHeader {
+  background-color: #dddddd;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid black;
+  height: 100%;
+}
+
+.tblCenterCell {
+  text-align: center;
+}
+
+.tblLeftCell {
+  text-align: left;
+}
+
+table td {
+  border-left: 1px solid #999999;
+  border-right: 1px solid #999999;
+  border-bottom: 1px solid black;
+}
+
+table tr:nth-child(even) {
+  background: #BFE2FF;
+}

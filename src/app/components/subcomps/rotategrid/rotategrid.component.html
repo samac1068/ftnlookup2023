@@ -1,0 +1,59 @@
+<div class="flextbl">
+  <!-- Contains ALL THREE datagrids of data -->
+  <div class="divUICInfo">
+    <div class="titleBar">UIC Information</div>
+    <div class="uicInfo">
+      <table style="width: 100%; height: 100%">
+        <tr>
+          <td class="infoText">UIC:</td>
+          <td class="infoValue">{{ uicData['uicInfo']['uic6'] }}</td>
+        </tr>
+        <tr>
+          <td class="infoText">ANAME:</td>
+          <td class="infoValue">{{ uicData['uicInfo']['aname'] }}</td>
+        </tr>
+        <tr>
+          <td class="infoText">COMPO:</td>
+          <td class="infoValue">{{ uicData['uicInfo']['compo'] }}</td>
+        </tr>
+        <tr>
+          <td class="infoText">SRC:</td>
+          <td class="infoValue">{{ uicData['uicInfo']['src'] }}</td>
+        </tr>
+        <tr>
+          <td class="infoText">BRANCH:</td>
+          <td class="infoValue">{{ uicData['uicInfo']['branch'] }}</td>
+        </tr>
+        <tr>
+          <td class="infoText">MTOE AUTH:</td>
+          <td class="infoValue">{{ uicData['uicInfo']['mtoeauth'] }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="divDateInfo">
+    <div class="titleBar">Date Information</div>
+    <ag-grid-angular style="width: 100%; height: 92.5%;"
+      class="ag-theme-alpine"
+      [rowData]="uicData['rd_dateInfo']"
+      [columnDefs]="dateColumnDef"
+      [headerHeight]="headerHeight"
+    ></ag-grid-angular>
+  </div>
+
+  <div class="divDwellInfo">
+    <div class="titleBar">Dwell Information</div>
+    <ag-grid-angular style="width: 100%; height: 92.5%;"
+       class="ag-theme-alpine"
+       [rowData]="uicData['rd_dwellInfo']"
+       [columnDefs]="dwellColumnDef"
+       [headerHeight]="headerHeight"
+    ></ag-grid-angular>
+  </div>
+</div>
+
+<div class="divRotationInfo">
+  <div class="titleBar">Rotation Information</div>
+  <app-rotate-barchart [uicData]="uicData"></app-rotate-barchart>
+</div>

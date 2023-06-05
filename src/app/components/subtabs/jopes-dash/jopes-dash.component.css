@@ -1,0 +1,71 @@
+.pgAccord {
+  height: 50vh;
+  width: 98vw;
+  overflow: hidden;
+}
+
+.dgDiv {
+  border: 2px solid slategray;
+  height: 400px;
+}
+
+.mat-expansion-panel-header {
+  background: #42646f !important;
+  color: white;
+  line-height: 17px;
+  height: 20px;
+  margin-bottom: 2px;
+}
+
+.mat-expansion-panel-header:hover {
+  background: #BFBF30 !important;
+  color: white;
+  line-height: 17px;
+  height: 20px;
+  margin-bottom: 2px;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  background: #63AFD0 !important;
+  color: black;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+:host ::ng-deep .ag-cell {
+  line-height: 17px;
+}
+
+/* MANUAL TABLE STYLE */
+table, tr, td {
+  border-collapse: collapse;
+  border: 1px solid slategray;
+}
+
+th {
+  font-weight: bold;
+  text-align: center;
+  background-color: #333333;
+  color: white;
+  border: 2px solid black;
+}
+
+.rowStyle {
+  height: 23px;
+}
+
+.cellHighlight {
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+}
+
+.cellNoHighlight {
+  font-weight: normal;
+}
+
+.cellCentered {
+  text-align: center;
+}

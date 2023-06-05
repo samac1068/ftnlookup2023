@@ -1,0 +1,69 @@
+#fpnbody {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.subtbl {
+  height: 98%;
+  white-space: nowrap;
+  border: 2px solid black;
+}
+
+.tableHeader {
+  background-color: #42646F;
+  color: white;
+  text-align:center;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+table { margin-bottom: 5px; }
+tr { border: none; }
+
+.title {
+  font-weight: bold;
+  font-size: 12px;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.colored {
+  background-color: #42646F;
+  color: white;
+  border: 1px solid gray;
+}
+
+#divNoRecords {
+  font-weight: bold;
+  font-size: 16px;
+  color: red;
+  margin-left: 10px;
+}
+
+/* These are used to color designated cells based on the cell value */
+.cell_red {
+  background-color: red;
+  color: white;
+}
+
+.cell_yellow {
+  background-color: yellow;
+  color: black;
+}
+
+.cell_green {
+  background-color: green;
+  color: white;
+}
+
+.cell_orange {
+  background-color: orange;
+  color: black;
+}
+
+.cell_none {
+  background-color: white;
+  color: black;
+}
+
+/* End cell coloring */

@@ -1,0 +1,24 @@
+.divMOB {
+  height: 500px;
+  width: 99%;
+  overflow: auto;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 2px;
+  font-size: 12px;
+}
+
+th {
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+:host ::ng-deep .ag-cell {
+  line-height: 17px;
+}

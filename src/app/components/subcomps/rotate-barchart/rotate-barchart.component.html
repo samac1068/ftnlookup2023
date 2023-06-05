@@ -1,0 +1,29 @@
+<div class="divCanvas" *ngIf="barchartHadData && barchartLoaded">
+  <div id="barchartSec" >
+    <div class="divRotateHead">
+      <div class="uicHeader headerText">UIC</div>
+      <div class="qtrHeader headerText" *ngFor="let qtr of qtrArr">
+        <div style="margin-top: 5px;" id="{{ qtr.year + '_' + qtr.qtr }}">
+          Q{{ qtr.qtr }}<br/>{{ qtr.year }}
+        </div>
+      </div>
+    </div>
+    <div class="chartRow" *ngFor="let row of uicData.rd_barchartInfo">
+      <span class="uicTitle">{{ row.uic }}</span>
+      <app-rotate-barchart-icon [rowData]="row" [yearStart]="minStart" [qtrWidth]="qtrWidth"></app-rotate-barchart-icon>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!barchartHadData && !barchartLoaded" class="loading">
+  Stand-by, Loading ROTATION Data!
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="!barchartHadData && barchartLoaded" class="boldText">
+  No Records Found
+</div>
+
+<div *ngIf="barchartHadData && barchartLoaded && barchartTimeout" class="boldText">
+  Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+</div>

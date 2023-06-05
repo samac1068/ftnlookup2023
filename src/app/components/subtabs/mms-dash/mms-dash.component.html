@@ -1,0 +1,75 @@
+<span class="mmsTitle">Associated with FTN: {{ ftn_uic.toUpperCase() }}</span>
+<hr/>
+
+<!-- MMS Message -->
+<div id="mms" class="classMMS">
+  <span class="mmsSubTitle">MMS Messages</span>
+  <div class="separator"></div>
+
+  <div class="msgContent">
+    <div *ngIf="!mmsLoaded && !mmsTimeout" class="loading">
+      Stand-by, Loading MMS Messages!
+      <mat-spinner class="centerItem"></mat-spinner>
+    </div>
+
+    <div *ngIf="mmsTimeout && mmsLoaded" class="boldText">
+      Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+    </div>
+
+    <div *ngIf="mmsLoaded && mmsNoRecords && !mmsTimeout" class="boldText">
+      No Records Found
+    </div>
+
+    <div id="divMMS" *ngIf="mmsLoaded && !mmsNoRecords && !mmsTimeout">
+      <table>
+        <tr class="tblHeader"><td *ngFor="let row of ds.columnDefinitions['mms']" width="{{ row.width }}" >{{ row.headerName }}</td></tr>
+        <tr *ngFor="let obj of ds.tabs[ftn_uic]['MMS_MSG']">
+          <td *ngFor="let col of ds.columnDefinitions['mms']" [class]="getColumnStyle(col.field)">
+            <span *ngIf="col.field == 'ID'"><a [href]="generateColLink(obj[col.field])" target="_blank">{{ obj[col.field] }}</a></span>
+            <span *ngIf="col.field != 'ID'">{{ obj[col.field] }}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- MDIS Messages -->
+<div id="mdis" class="classMMS">
+  <span class="mmsSubTitle">MDIS Messages</span>
+  <div class="separator"></div>
+
+  <div class="msgContent">
+    <div *ngIf="!mmsMdisLoaded && !mdisTimeout" class="loading">
+      Stand-by, Loading MDIS Messages!
+      <mat-spinner class="centerItem"></mat-spinner>
+    </div>
+
+    <div *ngIf="mdisTimeout && mmsMdisLoaded" class="boldText">
+      Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+    </div>
+
+    <div *ngIf="mmsMdisLoaded && mdisNoRecords && !mdisTimeout" class="boldText">
+      No Records Found
+    </div>
+
+    <div id="divMDIS" *ngIf="mmsMdisLoaded && !mdisNoRecords && !mdisTimeout">
+      <table>
+        <tr class="tblHeader"><td *ngFor="let row of ds.columnDefinitions['mms']" width="{{ row.width }}" >{{ row.headerName }}</td></tr>
+        <tr *ngFor="let obj of ds.tabs[ftn_uic]['MMS_MDIS']">
+          <td *ngFor="let col of ds.columnDefinitions['mms']" [class]="getColumnStyle(col.field)">
+            <span *ngIf="col.field == 'ID'"><a [href]="generateColLink(obj[col.field])" target="_blank">{{ obj[col.field] }}</a></span>
+            <span *ngIf="col.field != 'ID'">{{ obj[col.field] }}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

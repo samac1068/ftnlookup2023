@@ -1,0 +1,70 @@
+.flextbl {
+  width: 99%;
+  height: 330px;
+  display: flex;
+  flex-grow: 1;
+}
+
+.divUICInfo {
+  width: 25%;
+  height: 100%;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.divDateInfo {
+  width: 37%;
+  height: 99%;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.divDwellInfo {
+  width: 37%;
+  height: 99%;
+  overflow: hidden;
+}
+
+.divRotationInfo {
+  margin-top: 10px;
+  width: 99%;
+  height: 49%;
+  overflow: hidden;
+}
+
+.titleBar {
+  width: 100%;
+  height: 20px;
+  background-color: #89796C;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.infoText {
+  width: 100px;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: right;
+  padding-bottom: 5px;
+  /*background-color: #25547B;
+  color: white;*/
+}
+
+.infoValue {
+  font-size: 12px;
+  font-weight: normal;
+  padding-left: 5px;
+  vertical-align: middle;
+ }
+
+:host ::ng-deep .ag-cell {
+  line-height: 17px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}

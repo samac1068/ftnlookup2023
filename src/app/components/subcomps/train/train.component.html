@@ -1,0 +1,27 @@
+<span class="pgTitle">Training Level Readiness: {{ftn_uic}} as of [DATE]</span>
+<div *ngIf="uicData == null">No value Returned</div>
+<div *ngIf="uicData != null">
+  <div class="LUTable">
+    <table style="width: 500px;">
+      <tr><td style="width: 400px" class="boldLabel">ASGD Strength Shortfall (ITAVS):</td><td style="text-align:center" class="boldValue">{{uicData.ITAVS}}</td></tr>
+      <tr><td class="boldLabel">Special Duty Requirements (ITSDR):</td><td style="text-align:center" class="boldValue">{{uicData.ITSDR}}</td></tr>
+      <tr><td class="boldLabel">Available Funds (ITAFT):</td><td style="text-align:center" class="boldValue">{{uicData.ITAFT}}</td></tr>
+      <tr><td class="boldLabel">Equipment &amp; Materials (ITAVTRNG):</td><td style="text-align:center" class="boldValue">{{uicData.ITAVTRNG}}</td></tr>
+      <tr><td class="boldLabel">Qualified Leaders (ITAQL):</td><td style="text-align:center" class="boldValue">{{uicData.ITAQL}}</td></tr>
+      <tr><td class="boldLabel">TNG Areas &amp; Facilities (ITAFT):</td><td style="text-align:center" class="boldValue">{{uicData.ITAFT}}</td></tr>
+      <tr><td class="boldLabel">Availability Of Fuel (ITAFL):</td><td style="text-align:center" class="boldValue">{{uicData.ITAFL}}</td></tr>
+      <tr><td class="boldLabel">Available Ammunition (ITATA):</td><td style="text-align:center" class="boldValue">{{uicData.ITATA}}</td></tr>
+      <tr><td class="boldLabel">Flying Time/Hours (ITATM):</td><td style="text-align:center" class="boldValue">{{uicData.ITATM}}</td></tr>
+    </table>
+  </div>
+
+  <div class="RUTable">
+    <table style="width: 500px;">
+      <tr><td style="width: 400px" class="boldLabel">Training Resource Constraints:</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+      <tr><td class="boldLabel">Training Level:</td><td style="text-align:center" class="boldValue">{{uicData.TRRAT}}</td></tr>
+      <tr><td class="boldLabel">Days to Attain Full METL Proficiency:</td><td style="text-align:center" class="boldValue">{{uicData.TWRC1}}</td></tr>
+      <tr><td class="boldLabel">Primary Reason T-Level not T-1:</td><td style="text-align:center" class="boldValue">{{uicData.TRRESDEF}}</td></tr>
+      <tr><td class="boldLabel">Training Constraints Comment:</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+    </table>
+  </div>
+</div>

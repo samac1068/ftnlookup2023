@@ -1,0 +1,41 @@
+#gfmapcontainer {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+.gpanel {
+  width: 99%;
+  margin-left: 5px;
+  margin-top: 5px;
+  border: 1px gray solid;
+  background-color: #42646f;
+  color: white;
+  cursor: pointer;
+}
+
+.hideChildren > div{
+  display: none;
+}
+
+.sub {
+  height: 400px;
+  overflow: hidden;
+  background-color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+:host ::ng-deep .ag-cell {
+  line-height: 17px;
+}
+
+.gfmapGrid {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}

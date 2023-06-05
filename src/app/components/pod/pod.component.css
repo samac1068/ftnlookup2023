@@ -1,0 +1,39 @@
+#podHolder {
+  width: 99.5%;
+  height: calc(100vh - 240px);
+}
+
+/* Pod Styles */
+#mainBody {
+  height: 100%;
+  width: 100%;
+  border: 1px solid gray;
+  background-color: floralwhite;
+}
+
+.innerPod {
+  border:2px solid gray;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px darkgray;
+}
+
+.podTitleBox {
+  border-bottom: 2px solid black;
+
+  /* Background for the Pod Banner */
+  background-image: linear-gradient(0deg, #90a0c2 16.67%, #d2cfd6 16.67%, #d2cfd6 50%, #90a0c2 50%, #90a0c2 66.67%, #d2cfd6 66.67%, #d2cfd6 100%);
+  background-size: 6.00px 6.00px;
+}
+
+.podTitleTxt {
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 6px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkblue;
+}
+
+.podContent {
+  background-color: white;
+  padding: 2px;
+}

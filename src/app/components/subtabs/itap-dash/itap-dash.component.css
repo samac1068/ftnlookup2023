@@ -1,0 +1,36 @@
+#itapcontainer {
+  width: 98vw;
+  height: 76vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+#ipanel {
+  width: 99%;
+  margin-left: 5px;
+  margin-top: 5px;
+  border: 1px gray solid;
+  background-color: #42646f;
+  color: white;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.hideChildren > div{
+  display: none;
+}
+
+.sub {
+  height: 400px;
+  overflow: hidden;
+  background-color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+:host ::ng-deep .ag-cell {
+  line-height: 17px;
+}

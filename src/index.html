@@ -2,12 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Ftnlookup</title>
-  <base href="/">
+  <title>FTN/UIC Lookup</title>
+  <base href="./">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="./assets/fontawesome/css/all.css" rel="stylesheet">
+  <script>
+    // Need to verify the browser being used by the user - IE will auto redirect to the denial page
+    let browserAgent = navigator.userAgent.indexOf("MSIE") > -1 || navigator.userAgent.indexOf("rv:") > -1 || navigator.userAgent.indexOf("Trident") > -1;
+    if(browserAgent) window.location.href ="./unsupportedBrowser.html";
+  </script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
-  <app-root></app-root>
+<body class="mat-typography">
+  <script>
+	function evalStr(str) {
+      str.replace("<", "");
+      str.replace(">", "");
+      str.replace("/", "");
+    }
+
+    let jstr = "";
+    let ftnStr = window.location.href.split("ftn=")[1];
+    let uicStr = window.location.href.split("uic=")[1];
+
+    if(uicStr !== undefined) {
+      // Operations for UIC
+	    evalStr(uicStr);
+      jstr = `<app-root uic='${uicStr.substring(0, uicStr.indexOf("&"))}'></app-root>`;
+    } else if(ftnStr !== undefined) {
+      // Operations for FTN
+	    evalStr(ftnStr);
+      jstr = `<app-root ftn='${ftnStr.substr(0, 11)}'></app-root>`;
+    } else
+      jstr = "<app-root></app-root>";
+
+    document.write(jstr);
+  </script>
 </body>
 </html>

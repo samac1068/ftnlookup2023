@@ -1,0 +1,51 @@
+#accContainer {
+  height: 680px;
+  width: 99.5%;
+  /*border: 1px solid red;*/
+  max-height: 680px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.dataTbl {
+  width: 95%;
+  height: 92%;
+  text-align: center;
+  border: 2px solid black;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.dgDiv {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.cellHighlight {
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+}
+
+.cellNoHighlight {
+  font-weight: normal;
+}
+
+.cellCentered {
+  text-align: center;
+}

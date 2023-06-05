@@ -1,0 +1,33 @@
+<div id="gfmapcontainer" *ngIf="gfmapPodLoaded && !gfmapNoRecords && !gfmapTimeout">
+  <div #gpanel *ngFor="let gfarr of ds.tabs[ftn_uic]['GFMAP']"
+
+  >&nbsp;FTN Line No: {{ gfarr[0].FTN_Line_No}}
+    <br/>
+    <div class="sub">
+      <ag-grid-angular
+        class="ag-theme-alpine gfmapGrid"
+        [columnDefs]="ds.columnDefinitions['gfmap']"
+        [rowData]="gfarr"
+        [headerHeight]="ds.defaultHeaderHt"
+        [rowHeight]="ds.defaultRowHt"
+        [animateRows]="true"
+        (gridReady)="gfmapGridReady($event)">
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>
+
+<!-- [defaultColDef]="ds.defaultColDef" -->
+
+<div *ngIf="gfmapPodLoaded && gfmapNoRecords && !gfmapTimeout" class="boldText">
+  No Records Found
+</div>
+
+<div *ngIf="!gfmapPodLoaded && !gfmapTimeout" class="loading">
+  Standby, Loading GFMAP Data!
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="gfmapTimeout && gfmapPodLoaded" class="boldText">
+  Execution Timeout Expired.
+</div>

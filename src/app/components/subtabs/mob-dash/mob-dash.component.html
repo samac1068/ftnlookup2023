@@ -1,0 +1,22 @@
+<app-export-excel *ngIf="mobTabLoaded && !mobNoRecords && !mobTimeout" [ftn_uic]="ftn_uic" [selTab]="'MOB'"></app-export-excel>
+<ag-grid-angular #mobAgGrid *ngIf="mobTabLoaded && !mobNoRecords && !mobTimeout"
+                 style="width: 100%; height: 600px;" class="ag-theme-alpine"
+                 [defaultColDef]="ds.defaultColDef"
+                 [rowData]="ds.tabs[ftn_uic]['MOB']"
+                 [columnDefs]="ds.columnDefinitions['mob']"
+                 [headerHeight]="ds.defaultHeaderHt"
+                 [rowHeight]="ds.defaultRowHt"
+                 [animateRows]="true"></ag-grid-angular>
+
+<div *ngIf="mobTabLoaded && mobNoRecords && !mobTimeout" class="boldText">
+  No Records Found
+</div>
+
+<div *ngIf="!mobTabLoaded && !mobTimeout" class="loading">
+  Stand-by, Loading MOB Data!
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="mobTimeout && mobTabLoaded" class="boldText">
+  Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+</div>

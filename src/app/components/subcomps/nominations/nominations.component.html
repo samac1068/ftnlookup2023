@@ -1,0 +1,102 @@
+<div class="row" *ngFor="let pd of podData index as i;" style="padding-left: 15px; padding-right: 10px;">
+  <div id="fpnbody">
+      <table class="subtbl" [width]="podWidth" [ngStyle]="i%2?{'background-color': '#90a0c2'}:{'background-color': '#ffffff'}">
+        <tr>
+          <th style="width: 30%" class="tableHeader">Nominated</th>
+          <th style="width: 20%" class="tableHeader">State</th>
+          <th style="width: 20%" class="tableHeader">Cost ($K)</th>
+          <th style="width: 30%" class="tableHeader">Risk</th>
+        </tr>
+        <tr>
+          <td style="border-right: solid 2px #000;border-left: solid 2px #000; vertical-align:top">
+            <table>
+              <tr><td style="min-width: 130px"  class="title">Line Number:</td><td style="width: 90px">{{ pd.lineNumber }}</td></tr>
+              <tr><td class="title">Rotational Fill:</td><td>{{ pd.rotationalFill }}</td></tr>
+              <tr><td class="title">Submit To JFP:</td><td>{{ pd.submittedToJfp }}</td></tr>
+              <tr><td class="title">Service Agency:</td><td>{{ pd.service }}</td></tr>
+              <tr><td class="title">Force Provider:</td><td>{{ pd.forceProvider }}</td></tr>
+              <tr><td class="title">Component:</td><td>{{ pd.component }}</td></tr>
+              <tr><td class="title">Service:</td><td>{{ pd.service }}</td></tr>
+              <tr><td class="title">PAX:</td><td>{{ pd.nominatedPax }}</td></tr>
+              <tr><td class="title">Nom Amts:</td><td>{{ pd.nominatedAmount }}</td></tr>
+              <tr><td class="title">Nom Amy Type:</td><td>UNKNOWN</td></tr>
+              <tr><td class="title">LAD:</td><td>{{ pd.lad }}</td></tr>
+              <tr><td class="title">Duration Days:</td><td>UNKNOWN</td></tr>
+              <tr><td class="title">End Date:</td><td>{{ pd.endDate }}</td></tr>
+              <tr><td class="title">PTDO Days:</td><td>{{ pd.ptdoDays }}</td></tr>
+              <tr><td class="title">JS Binning:</td><td [ngClass]="setCellBGColor(pd.jsBinningCode)">{{ pd.jsBinningCode }}</td></tr>
+              <tr><td class="title">Alert Date:</td><td>{{ pd.alertDate }}</td></tr>
+              <tr><td class="title">MOB Date:</td><td>{{ pd.mobilizationDate }}</td></tr>
+              <tr><td class="title">DWELL:</td><td>{{ pd.dwell }}</td></tr>
+              <tr><td class="title">DWELL Months:</td><td>UNKNOWN</td></tr>
+              <tr><td class="title">BOG-DWELL:</td><td>{{ pd.bogDwell }}</td></tr>
+              <tr><td class="title">Prev ReDeploy:</td><td>{{ pd.previousRedeployDate }}</td></tr>
+              <tr><td class="title">Prev Demob:</td><td>{{ pd.previousDemobilizationDate }}</td></tr>
+              <tr><td class="title">Prev Op:</td><td>{{ pd.previousOperation }}</td></tr>
+            </table>
+          </td>
+          <td style="border-right: solid 2px #000;border-left: solid 2px #000;vertical-align:top;">
+            <table>
+              <tr><td style="min-width: 130px" class="title">Joint Force:</td><td style="width: 90px">{{ pd.forceProvider }}</td></tr>
+              <tr><td class="title">ILO:</td><td>UNKNOWN</td></tr>
+              <tr><td class="title">Ad-hoc:</td><td>UNKNOWN</td></tr>
+              <tr><td class="title">Service Red Line:</td><td>{{ pd.serviceRedLine }}</td></tr>
+              <tr><td class="title">Source Next FY:</td><td>{{ pd.sourceNextFiscalYear }}</td></tr>
+              <tr><td class="title">REMOB:</td><td>{{ pd.remobilization }}</td></tr>
+              <tr><td colspan="2" style="height: 72px" class="title">&nbsp;</td></tr>
+              <tr><td class="title" style="width: 130px">UIC:</td><td>{{ pd.uic }}</td></tr>
+              <tr><td class="title">Unit Name:</td><td>{{ pd.unitName }}</td></tr>
+              <tr><td class="title">Home Station:</td><td>{{ pd.homeStation }}</td></tr>
+              <tr><td class="title">Home State:</td><td>{{ pd.homeState }}</td></tr>
+              <tr><td class="title">O6 Name:</td><td>{{ pd.concurrenceName }}</td></tr>
+              <tr><td class="title">O6 Date:</td><td>{{ pd.concurrenceDate }}</td></tr>
+              <tr><td class="title">AAD:</td><td>{{ pd.aad }}</td></tr>
+              <tr><td class="title">Created By:</td><td>{{ pd.createdByUserID }}</td></tr>
+              <tr><td class="title">on:</td><td>{{ pd.createdDate }}</td></tr>
+              <tr><td class="title">Last Updated By:</td><td>{{ pd.modifiedByUserID }}</td></tr>
+              <tr><td class="title">on:</td><td>{{ pd.modifiedDate }}</td></tr>
+              <tr><td class="title">Submitted By:</td><td>{{ pd.submittedByUserID }}</td></tr>
+              <tr><td class="title">on:</td><td>{{ pd.submittedDate }}</td></tr>
+            </table>
+          </td>
+          <td style="border-right: solid 2px #000;border-left: solid 2px #000;vertical-align:top;">
+            <table>
+              <tr><td style="min-width: 130px">Joint Force:</td><td style="width: 90px">UNKNOWN</td></tr>
+              <tr><td class="title">Prep:</td><td>{{ pd.preparationCost }}</td></tr>
+              <tr><td>&nbsp;</td><td>UNKNOWN</td></tr>
+              <tr><td class="title">Deps:</td><td>{{ pd.deploymentCost}}</td></tr>
+              <tr><td>&nbsp;</td><td>UNKNOWN</td></tr>
+              <tr><td class="title">Ops:</td><td>{{ pd.operationsCost }}</td></tr>
+              <tr><td>&nbsp;</td><td>UNKNOWN</td></tr>
+              <tr><td class="title">Re-Dep:</td><td>{{ pd.redeploymentCost }}</td></tr>
+            </table>
+          </td>
+          <td style="border-right: solid 2px #000;border-left: solid 2px #000;vertical-align:top;">
+            <table>
+              <tr><td class="title" style="min-width: 130px"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> DWELL:</td>
+                <td [ngClass]="setCellBGColor(pd.dwellRisk)">{{ pd.dwellRisk }}</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> Readiness:</td>
+                <td [ngClass]="setCellBGColor(pd.readinessRisk)">{{ pd.readinessRisk }}</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> Suitability:</td>
+                <td [ngClass]="setCellBGColor(pd.suitabilityRisk)">{{ pd.suitabilityRisk }}</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> Availability:</td>
+                <td [ngClass]="setCellBGColor(pd.availabilityRisk)">{{ pd.availabilityRisk }}</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> Sustainment:</td>
+                <td [ngClass]="setCellBGColor(pd.sustainmentRisk)">{{ pd.sustainmentRisk }}</td></tr>
+              <tr><td colspan="2" style="height: 40px">&nbsp;</td></tr>
+              <tr><td style="height: 30px" class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> CJCS Order <br/>Remarks</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> JFP Order <br/>Remarks</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> LAD Order <br/>Comments</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> Service Red Line <br/>Comments</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> JS Binning <br/>Comments</td></tr>
+              <tr><td class="title"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> Force Provider <br/>Comments</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+<div *ngIf="podData.length == 0" id="divNoRecords">
+  No rows were returned.
+</div>

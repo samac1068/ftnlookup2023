@@ -1,0 +1,71 @@
+<span class="pgTitle">Personnel Level for: {{ftn_uic}} as of TodayDate</span>
+<div *ngIf="uicData == null">No value Returned</div>
+<div class="upperTables" *ngIf="uicData != null">
+  <div class="LUTable">
+    <table style="width: 100%; height:100%">
+      <tr><td colspan="2">PERSONNEL P-LEVEL TURNOVER</td></tr>
+      <tr><td class="boldLabel">Personnel Level (p):</td><td style="text-align:center">{{ uicData.PRRAT }}</td></tr>
+      <tr><td style="width: 220px" class="boldLabel">Primary Reason P-Level Not P1:</td><td style="text-align:center">{{ uicData.PRRES }}</td></tr>
+      <tr><td class="boldLabel">Personnel Turnover Last 90-days:</td><td style="text-align:center">{{ uicData.APERT }}</td></tr>
+    </table>
+  </div>
+
+  <div class="RUTable">
+    <table style="width: 100%; height:100%">
+      <tr><td colspan="2">PERSONNEL RESOURCE AREA</td></tr>
+      <tr>
+        <td class="boldLabel">Assigned (AS):</td>
+        <td style="text-align:center">{{ uicData.ASRAT }}</td></tr>
+      <tr>
+        <td style="width: 220px" class="boldLabel">Available (AV)::</td>
+        <td style="text-align:center">{{ uicData.AVRAT }}</td></tr>
+      <tr>
+        <td class="boldLabel">Available MOS Qualified (MS):</td>
+        <td style="text-align:center">{{ uicData.MSRAT }}</td></tr>
+      <tr>
+        <td class="boldLabel">Available Senior Grade (SG)</td>
+        <td style="text-align:center">{{uicData.SGPER}} or {{uicData.SGRAT}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="lowerTables" *ngIf="uicData != null">
+  <div class="LLTable">
+    <span class="sectionTitle">COMMANDERS COMMENT</span>
+    <table style="width:100%; height:100%">
+      <tr>
+        <th>Col1</th>
+        <th>Col2</th>
+        <th>Col3</th>
+      </tr>
+    </table>
+  </div>
+
+  <div class="RLTable">
+    <span class="sectionTitle">TOTALS FOR UIC</span>
+    <table style="width:100%; height:100%">
+      <tr>
+        <th>Col1</th>
+        <th>Col2</th>
+        <th>Col3</th>
+        <th>Col4</th>
+        <th>Col5</th>
+        <th>Col6</th>
+        <th>Col7</th>
+        <th>Col8</th>
+        <th>Col9</th>
+      </tr>
+    </table>
+    <br/>
+    <table style="width:100%; height:100%">
+      <tr>
+        <th>Col1</th>
+        <th>Col2</th>
+        <th>Col3</th>
+        <th>Col4</th>
+      </tr>
+    </table>
+
+  </div>
+</div>

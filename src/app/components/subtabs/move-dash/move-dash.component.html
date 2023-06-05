@@ -1,0 +1,40 @@
+<div id="moveContainer">
+  <span class="title">Deploy/Redeploy Pax by Date</span>
+  <div class="cssContainer" [style.width.px]="cardDim.availWidth" [style.height.px]="cardDim.availHeight">
+    <div class="divChart" *ngFor="let card of ds.tabs[ftn_uic]['MOVE']"
+         [style.width.px]="cardDim.width + 50" [style.height.px]="cardDim.height - 10">
+      <div style="width:100%; height: 30px;"><span class="areaTitle">Rec ID: {{ card['RECID'] }}</span></div>
+      Chart Appears Here
+      <!--<div>
+          <ngx-charts-area-chart
+            [results]="card['MISSION']"
+            [view]= "[cardDim.width, cardDim.height]"
+
+            [schemeType] = "schemeType"
+            [animations] = "animations"
+            [legend] =  "legend"
+            [legendTitle] = "legendTitle"
+            [legendPosition] = "legendPosition"
+            [xAxis] = "xAxis"
+            [yAxis] = "yAxis"
+            [showGridLines] = "showGridLines"
+            [roundDomains] = "roundDomains"
+            [showXAxisLabel] = "showXAxisLabel"
+            [showYAxisLabel] = "showYAxisLabel"
+            [xAxisLabel] = "xAxisLabel"
+            [yAxisLabel] = "yAxisLabel"
+            [timeline] = "timeline"
+          ></ngx-charts-area-chart>
+        </div>-->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!podLoaded" class="loading">
+  {{ moveInfoText }}
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="podLoaded && !hasMoveData" class="boldText">
+  No Records Found
+</div>

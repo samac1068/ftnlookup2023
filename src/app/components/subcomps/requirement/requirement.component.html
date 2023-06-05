@@ -1,0 +1,175 @@
+<div id="reqbody" *ngIf="hasData">
+  <fieldset style="height: 70px; width:100%">
+<!--    <legend style="font-size: 13px; font-weight: bold">Requirement</legend>-->
+    <table style="width:100%; height:100%; white-space: nowrap;" class="colored">
+      <tr>
+        <td class="title">Requirement Type: <span class="yw_high">{{ podData.rqmtType }}</span></td>
+        <td colspan="2" class="title">JCRM Status: <span class="yw_high">{{ podData.statusStateName }}</span></td>
+      </tr>
+      <tr>
+        <td class="title">JFP Assigned: <span class="yw_high">{{ podData.jfpName}}</span></td>
+        <td class="title">JFP Assigned Date: <span class="yw_high">{{ podData.dateApproved }}</span></td>
+        <td class="title">JFP Last Import: <span class="yw_high">{{ podData.modifiedDate }}</span></td>
+      </tr>
+    </table>
+  </fieldset>
+  <br/>
+  <div>
+    <table style="width:100%; height:25px; white-space: nowrap;" class="grpBorder">
+      <tr>
+        <td class="title">JRC: <span class="bl_high">{{ podData.jrc }}</span></td>
+        <td class="title">Nomenclature: <span class="bl_high">{{ podData.nomenclature }}</span></td>
+        <td class="title">LAD: <span class="bl_high">{{ podData.startDate }}</span></td>
+        <td class="title">End Date: <span class="bl_high">{{ podData.endDate }}</span></td>
+      </tr>
+    </table>
+    <br/>
+    <table style="width:100%;" class="grpBorder">
+      <tr>
+        <td>
+          <table style="width:100%">
+            <tr><td style="width: 100px" class="title">FY:</td><td><span class="bl_high">{{ podData.fiscalYear }}</span></td></tr>
+            <tr><td class="title">Operations:</td><td><span class="bl_high">{{ podData.operation }}</span></td></tr>
+            <tr><td class="title">Rotation:</td><td><span class="bl_high">{{ podData.internalRotation }}</span></td></tr>
+            <tr><td class="title">Nonstandard:</td><td><span class="bl_high">{{ podData.nonstandardFlag }}</span></td></tr>
+          </table>
+        </td>
+        <td>
+          <table style="width:100%;">
+            <tr><td style="width: 100px" class="title">Req Amt:</td><td><span class="bl_high">{{ podData.unitQuantity_amount }}</span></td></tr>
+            <tr><td class="title">Est PAX:</td><td><span class="bl_high">{{ podData.pax }}</span></td></tr>
+            <tr><td class="title">Attachment:</td><td>&nbsp;</td></tr>
+          </table>
+        </td><td>
+          <table style="width:100%">
+            <tr><td style="width: 150px" class="title">Combatant Command:</td><td><span class="bl_high">{{ podData.cocomName }}</span></td></tr>
+            <tr><td class="title">Subordinate Command:</td><td><span class="bl_high">{{ podData.component }}</span></td></tr>
+            <tr><td class="title">Sourcing Status:</td><td><span class="bl_high">{{ podData.sourcingStatus }}</span></td></tr>
+            <tr><td class="title">FTN Category:</td><td><span class="bl_high">{{ podData.ftnCategory }}</span></td></tr>
+          </table>
+          </td>
+      </tr>
+    </table>
+  </div>
+  <hr/>
+  <br/>
+  <div>
+    <table style="width:100%;" class="grpBorder">
+      <tr>
+        <td>
+          <table style="width:100%">
+            <tr><td style="width: 120px" class="title">RFF:</td><td>&nbsp;</td></tr>
+            <tr><td class="title">RFFID:</td><td><span class="bl_high">{{ podData.rffid }}</span></td></tr>
+            <tr><td class="title">JRSOI:</td><td><span class="bl_high">{{ podData.jrsoi }}</span></td></tr>
+            <tr><td class="title">Duration:</td><td><span class="bl_high">{{ podData.duration }}</span></td></tr>
+            <tr><td class="title">Location:</td><td><span class="bl_high">{{ podData.deploymentLocation }}</span></td></tr>
+            <tr><td class="title">Country Name:</td><td><span class="bl_high">{{ podData.Country }}</span></td></tr>
+            <tr><td class="title">CCMRF:</td><td>&nbsp;</td></tr>
+          </table>
+        </td><td>
+          <table style="width:100%">
+            <tr><td style="width: 120px" class="title">AAD:</td><td>&nbsp;</td></tr>
+            <tr><td class="title">TOA:</td><td>&nbsp;</td></tr>
+            <tr><td class="title">DEMOB:</td><td>&nbsp;</td></tr>
+          </table>
+      </td><td>
+          <table style="width:100%">
+            <tr><td style="width: 100px" class="title">SFA:</td><td><span class="bl_high">{{ podData.sfa }}</span></td></tr>
+            <tr><td class="title">TSC:</td><td><span class="bl_high">{{ podData.tsc }}</span></td></tr>
+            <tr><td class="title">Coalition:</td><td>&nbsp;</td></tr>
+            <tr><td class="title">Contract:</td><td><span class="bl_high">{{ podData.contract }}</span></td></tr>
+            <tr><td class="title">ILO:</td><td><span class="bl_high">{{ podData.inLieuOf }}</span></td></tr>
+            <tr><td class="title">PTDO:</td><td><span class="bl_high">{{ podData.ptdo }}</span></td></tr>
+          </table>
+      </td><td>
+          <table style="width:100%">
+            <tr><td style="width: 150px" class="title">Svc/Component Only:</td><td><span class="bl_high">{{ podData.serviceorcomponentonly }}</span></td></tr>
+            <tr><td class="title">Internal Rotation:</td><td><span class="bl_high">{{ podData.internalRotation }}</span></td></tr>
+            <tr><td class="title">Joint Force:</td><td><span class="bl_high">{{ podData.jointSourcing }}</span></td></tr>
+            <tr><td class="title">Is Special Forces:</td><td><span class="bl_high">{{ podData.socom }}</span></td></tr>
+            <tr><td class="title">GWOT Priority:</td><td><span class="bl_high">{{ podData.gwotPriority }}</span></td></tr>
+            <tr><td class="title">PTDO Response Time:</td><td><span class="bl_high">{{ podData.ptdoResponse_Time }}</span></td></tr>
+            <tr><td class="title">Assigned Force:</td><td><span class="bl_high">{{ podData.assignedForce }}</span></td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <hr/>
+  <div>
+    <table style="width:100%; height:25px;" class="grpBorder">
+      <tr>
+        <td class="title">COMCOM DEPORD: <span class="bl_high">{{ podData.jfpName }}</span></td>
+        <td class="title">DEPORD Para: <span class="bl_high">{{ podData.dateApproved }}</span></td>
+        <td class="title">Re-DEPORD: <span class="bl_high">{{ podData.modifiedDate }}</span></td>
+      </tr>
+    </table>
+  </div>
+  <hr/>
+  <div>
+    <table style="width:100%;" class="grpBorder">
+      <tr>
+        <td>
+          <table style="width:100%">
+            <tr><td style="width: 100px" class="title">Req Name:</td><td>&nbsp;</td></tr>
+            <tr><td class="title">Unit Name:</td><td>&nbsp;</td></tr>
+            <tr><td class="title">UTC:</td><td>&nbsp;</td></tr>
+            <tr><td class="title">SRC:</td><td>&nbsp;</td></tr>
+          </table>
+        </td><td>
+          <table style="width:100%">
+            <tr><td colspan="2">&nbsp;</td></tr>
+            <tr><td colspan="2">&nbsp;</td></tr>
+            <tr><td style="width: 150px" class="title">Service:</td><td>&nbsp;</td></tr>
+            <tr><td class="title">Preferred Unit Type:</td><td><span class="bl_high">{{ podData.unitType }}</span></td></tr>
+          </table>
+        </td><td>
+          <table id="history" style="width:100%">
+            <tr>
+              <td class="title colored">&nbsp;</td>
+              <td class="title colored" style="text-align:center; width: 200px">FTN</td>
+              <td class="title colored" style="text-align:center">Rotation</td>
+              <td class="title colored" style="text-align:center">Service</td>
+            </tr>
+            <tr>
+              <td class="title" style="background-color:#0CF;text-align: center">Previous</td>
+              <td style="text-align:center; width: 60%"><span style="font-weight: bold"><button mat-button color="primary" class="btnLink" (click)="openNewTab(podData.previousFtn)">{{ podData.previousFtn }}</button></span></td>
+              <td style="text-align:center">&nbsp;</td>
+              <td style="text-align:center">&nbsp;</td></tr>
+            <tr>
+              <td class="title" style="background-color:#0CF;text-align: center">Next</td>
+              <td style="text-align:center"><span style="font-weight: bold"><button mat-button color="primary" class="btnLink" (click)="openNewTab(podData.futureFTN)">{{ podData.futureFTN }}</button></span></td>
+              <td style="text-align:center">&nbsp;</td>
+              <td style="text-align:center">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <hr/>
+  <div>
+    <table style="width:100%; height:50px;" class="grpBorder">
+      <tr>
+        <td style="text-align:center; width: 100px;" class="titled colored">POC</td>
+        <td>
+          <table style="width: 100%">
+            <tr>
+              <td class="title" style="width:10%">Name:</td>
+              <td style="width:40%"><span class="bl_high">{{ podData.poc_firstname }} {{ podData.poc_lastname }}</span></td>
+              <td class="title" style="width:10%">Phone:</td>
+              <td style="width:40%"><span class="bl_high">{{ podData.poc_phone }}</span></td>
+            </tr>
+            <tr>
+              <td class="title">Rank:</td><td><span class="bl_high">{{ podData.poc_rank }}</span></td>
+              <td class="title">Email:</td><td><span class="bl_high">{{ podData.poc_sipremail }}</span></td>
+            </tr>
+            <tr>
+              <td class="title">Service:</td><td colspan="3"><span class="bl_high">{{ podData.poc_service }}</span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

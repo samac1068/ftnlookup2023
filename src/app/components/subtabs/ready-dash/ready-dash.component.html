@@ -1,0 +1,19 @@
+<mat-tab-group class="ready-stretched-tabs mat-elevation-z4" *ngIf="readyTabLoaded && readyHasData">
+  <mat-tab [label]="uicpod.uic" *ngFor="let uicpod of ds.tabs[ftn_uic]['READY']; let i = index">
+    <span class="uicTabData">{{ uicpod.title }}</span>
+    <app-pod [tabName]="'READY'" [uicData]="uicpod" [ftn_uic]="uicpod.uic" ></app-pod>
+  </mat-tab>
+</mat-tab-group>
+
+<div *ngIf="!readyTabLoaded" class="loading">
+  {{ userInfoText }}
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="readyTabLoaded && !readyHasData && !readyTimeoutExpired" class="boldText">
+  No Records Found
+</div>
+
+<div *ngIf="readyTimeoutExpired && readyTabLoaded" class="boldText">
+  Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+</div>

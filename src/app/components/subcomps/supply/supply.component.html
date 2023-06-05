@@ -1,0 +1,27 @@
+<span class="pgTitle">Equipment Supply Level for: {{ftn_uic}}</span>
+<div *ngIf="uicData == null">No value Returned</div>
+<div class="LUTable" *ngIf="uicData != null">
+  <table style="width: 500px;">
+    <tr><td colspan="2">EQUIPMENT SUPPLY S-LEVEL</td></tr>
+    <tr><td style="width: 400px" class="boldLabel">Equipment On-Hand Level:</td><td style="text-align:center" class="boldValue">{{uicData.ESRAT}}</td></tr>
+    <tr><td class="boldLabel">Primary Reason S-Level Not S1:</td><td style="text-align:center" class="boldValue">{{uicData.reasndesc}}</td></tr>
+    <tr><td class="boldLabel">Pacing Item Summary:</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+    <tr><td class="boldLabel">Lowest Packing Item S-Level:</td><td style="text-align:center" class="boldValue">{{uicData.PIRAT}}</td></tr>
+    <tr><td class="boldLabel">On-Hand Equipment R-Level (OH):</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+    <tr><td class="boldLabel">On-Hand Reportable Equipment Full Mission Capable:</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+    <tr><td class="boldLabel">Lowest Pacing Item On-Hand Full Mission Capable:</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+  </table>
+
+  <table style="width: 600px; height: 30px; margin-top: 30px;">
+    <tr>
+      <td style="width:1px; background-color: gray;">&nbsp;</td>
+      <td class="boldLabel" style="text-align:center">S-1:</td><td style="text-align:center" class="boldValue">{{uicData.EHRD1}}</td>
+      <td style="width:1px; background-color: gray;">&nbsp;</td>
+      <td class="boldLabel" style="text-align:center">S-2:</td><td style="text-align:center" class="boldValue">{{uicData.EHRD2}}</td>
+      <td style="width:1px; background-color: gray;">&nbsp;</td>
+      <td class="boldLabel" style="text-align:center">S-3:</td><td style="text-align:center" class="boldValue">{{uicData.EHRD3}}</td>
+      <td style="width:1px; background-color: gray;">&nbsp;</td>
+      <td class="boldLabel" style="text-align:center">S-4:</td><td style="text-align:center" class="boldValue">{{uicData.EHRD4}}</td>
+    </tr>
+  </table>
+</div>

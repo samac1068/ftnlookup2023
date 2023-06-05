@@ -1,0 +1,24 @@
+<div id="podHolder" #mainHolder>
+  <div id="mainBody" (window:resize)="calculatePageDims()">
+    <div class="innerPod" id="{{ pod.name }}" *ngFor="let pod of pods; let i = index" [ngStyle]="podStyle">
+      <div class="podTitleBox" [ngStyle]="podTitleStyle">
+        <span class="podTitleTxt">{{ pod.title }}</span>
+        <div style="float:right; margin-right: 10px;"><i class="far fa-window-maximize" style="cursor: pointer;" (click)="activateSelected(i)"></i></div>
+      </div>
+      <div class="podContent" [ngStyle]="podContentStyle" [ngSwitch]="pod.name">
+        <ng-template [ngSwitchCase]="'req'"><app-requirement [ftn_uic]="ftn_uic"></app-requirement></ng-template>
+        <ng-template [ngSwitchCase]="'notes'"><app-notes [ftn_uic]="ftn_uic"></app-notes></ng-template>
+        <ng-template [ngSwitchCase]="'fpnom'"><app-nominations [ftn_uic]="ftn_uic" [podtype]="'fpnom'"></app-nominations></ng-template>
+        <ng-template [ngSwitchCase]="'jfpnom'"><app-nominations [ftn_uic]="ftn_uic" [podtype]="'jfpnom'"></app-nominations></ng-template>
+        <ng-template [ngSwitchCase]="'nonstand'"><app-nonstandard [ftn_uic]="ftn_uic"></app-nonstandard></ng-template>
+        <ng-template [ngSwitchCase]="'adhoc'"><app-adhoc [ftn_uic]="ftn_uic"></app-adhoc></ng-template>
+
+        <ng-template [ngSwitchCase]="'personnel'"><app-personnel [uicData]="uicData[pod.name]" [ftn_uic]="ftn_uic"></app-personnel></ng-template>
+        <ng-template [ngSwitchCase]="'supply'"><app-supply [uicData]="uicData[pod.name]" [ftn_uic]="ftn_uic"></app-supply></ng-template>
+        <ng-template [ngSwitchCase]="'service'"><app-service [uicData]="uicData[pod.name]" [ftn_uic]="ftn_uic"></app-service></ng-template>
+        <ng-template [ngSwitchCase]="'train'"><app-train [uicData]="uicData[pod.name]" [ftn_uic]="ftn_uic"></app-train></ng-template>
+        <ng-template [ngSwitchCase]="'comments'"><app-comments [uicData]="uicData[pod.name]" [ftn_uic]="ftn_uic"></app-comments></ng-template>
+      </div>
+    </div>
+  </div>
+</div>

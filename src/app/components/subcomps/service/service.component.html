@@ -1,0 +1,12 @@
+<span class="pgTitle">Equipment Serviceability Level for: {{ftn_uic}}</span>
+<div *ngIf="uicData == null">No value Returned</div>
+<div class="LUTable" *ngIf="uicData != null">
+  <table style="width: 500px; margin-top: 30px;">
+    <tr><td style="width: 400px" class="boldLabel">Equipment Serviceability Level:</td><td style="text-align:center" class="boldValue">{{uicData.ERRAT}}</td></tr>
+    <tr><td style="width: 400px" class="boldLabel">Primary Reason R-Level Not R-1:</td><td style="text-align:center" class="boldValue">{{uicData.REASNDESC}}</td></tr>
+    <tr><td class="boldLabel">Pacing Item R-Level (PI):</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+    <tr><td class="boldLabel">On-Hand Equipment R-Level (OH):</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+    <tr><td class="boldLabel">On-Hand Reportable Equipment Full Mission Capable:</td><td style="text-align:center" class="boldValue">{{uicData.PERRY}}</td></tr>
+    <tr><td class="boldLabel">Lowest Pacing Item On-Hand Full Mission Capable:</td><td style="text-align:center" class="boldValue">BLANK HERE</td></tr>
+  </table>
+</div>

@@ -1,0 +1,5 @@
+<app-pod [tabName]="'JCRM'" [ftn_uic]="ftn_uic" *ngIf="podLoaded"></app-pod>
+<div *ngIf="!podLoaded" class="loading">
+  Stand-by, Loading JCRM Data.
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>

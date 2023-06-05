@@ -1,0 +1,22 @@
+<ag-grid-angular #mobAgGrid *ngIf="fmswebTabLoaded && !fmswebNoRecords && !fmswebTimeout"
+                 style="width: 100%; height: 690px;" class="ag-theme-alpine"
+                 [defaultColDef]="ds.defaultColDef"
+                 [rowData]="ds.tabs[ftn_uic]['FMSWEB']"
+                 [columnDefs]="ds.columnDefinitions['fmsweb']"
+                 [headerHeight]="ds.defaultHeaderHt"
+                 [rowHeight]="ds.defaultRowHt"
+                 [animateRows]="true">
+</ag-grid-angular>
+
+<div *ngIf="fmswebTabLoaded && fmswebNoRecords && !fmswebTimeout" class="boldText">
+  No Records Found
+</div>
+
+<div *ngIf="!fmswebTabLoaded && !fmswebTimeout" class="loading">
+  Stand-by, Loading FMSWEB Data!
+  <mat-spinner class="centerItem"></mat-spinner>
+</div>
+
+<div *ngIf="fmswebTimeout && fmswebTabLoaded" class="boldText">
+  Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+</div>
