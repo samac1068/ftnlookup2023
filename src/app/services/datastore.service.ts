@@ -9,7 +9,7 @@ export class DatastoreService {
   // Variables
   private _passKey: string = "4A3F6BD3-61FB-467B-83D0-0EFBAF72AFC4";
   //private _connectid: string  = 'MobCopConnectionString';
-  private _appVersion: string = '3.1.23.0605';
+  private _appVersion: string = '3.1.23.0607';
   private _apiServer: string = "";
   private _apiLocation: string = "";
 

@@ -1,5 +1,12 @@
-<app-pod [tabName]="'JCRM'" [ftn_uic]="ftn_uic" *ngIf="podLoaded"></app-pod>
-<div *ngIf="!podLoaded" class="loading">
+<ng-container *ngIf="jcrmPodsLoaded && jcrmHasData">
+  <app-pod [tabName]="'JCRM'" [ftn_uic]="ftn_uic" *ngIf="jcrmPodsLoaded"></app-pod>
+</ng-container>
+
+<div *ngIf="jcrmPodsLoaded && !jcrmHasData" class="boldText">
+  No JCRM Data Found
+</div>
+
+<div *ngIf="!jcrmPodsLoaded && !jcrmHasData" class="loading">
   Stand-by, Loading JCRM Data.
   <mat-spinner class="centerItem"></mat-spinner>
 </div>

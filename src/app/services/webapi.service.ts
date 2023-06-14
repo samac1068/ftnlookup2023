@@ -117,16 +117,16 @@ export class WebapiService {
       .pipe(catchError(WebapiService.errorHandler)));
   }
 
-  getFTNMDIS(ftnuic: string): Observable<any> {
-    let fullDomain: string = this.identifyWSServer() + `/GetFTNMDIS`;
-    const params = new HttpParams().set('id', this.ds.getPassKey()).set('ftn', ftnuic);
+  getFTNUICMDIS(ftnuic: string): Observable<any> {
+    let fullDomain: string = this.identifyWSServer() + ((this.ds.appMode == 'ftn') ? '/GetFTNMDIS' : '/GetMDISUIC');
+    const params = new HttpParams().set('id', this.ds.getPassKey()).set(this.ds.appMode, ftnuic);
     return (this.http.get<any>(fullDomain, {params})
       .pipe(catchError(WebapiService.errorHandler)));
   }
 
-  getMOB(ftnuic: string): Observable<any> {
-    let fullDomain: string = this.identifyWSServer() + `/GetFTNPlanning`;
-    const params = new HttpParams().set('id', this.ds.getPassKey()).set('ftn', ftnuic);
+  getFTNUICMOB(ftnuic: string): Observable<any> {
+    let fullDomain: string = this.identifyWSServer() + ((this.ds.appMode == 'ftn') ? '/GetFTNPlanning' : '/GetMOBUIC');
+    const params = new HttpParams().set('id', this.ds.getPassKey()).set(this.ds.appMode, ftnuic);
     return (this.http.get<any>(fullDomain, {params})
       .pipe(catchError(WebapiService.errorHandler)));
   }
@@ -159,16 +159,16 @@ export class WebapiService {
       .pipe(catchError(WebapiService.errorHandler)));
   }
 
-  getJOPES(ftnuic: string): Observable<any> {
-    let fullDomain: string = this.identifyWSServer() + `/GetJOPES`;
-    const params = new HttpParams().set('id', this.ds.getPassKey()).set('ftn', ftnuic);
+  getFTNUICJOPES(ftnuic: string): Observable<any> {
+    let fullDomain: string = this.identifyWSServer() + ((this.ds.appMode == 'ftn') ? '/GetJOPES' : '/GetJOPESUIC');
+    const params = new HttpParams().set('id', this.ds.getPassKey()).set(this.ds.appMode, ftnuic);
     return (this.http.get<any>(fullDomain, {params})
       .pipe(catchError(WebapiService.errorHandler)));
   }
 
   getOrderRecID(ftnuic: string, objtype: string): Observable<any> {
     let fullDomain: string = this.identifyWSServer() + ((objtype === "ftn") ? `/GetOrderRecID` : `/GetOrdersUIC`);
-    const params = new HttpParams().set('id', this.ds.getPassKey()).set(((objtype === "ftn") ? 'ftn' : 'uic'), ftnuic);
+    const params = new HttpParams().set('id', this.ds.getPassKey()).set(this.ds.appMode, ftnuic);
     return (this.http.get<any>(fullDomain, {params})
       .pipe(catchError(WebapiService.errorHandler)));
   }
@@ -435,12 +435,12 @@ export class WebapiService {
       .pipe(catchError(WebapiService.errorHandler)));
   }
 
-  getJOPESUIC(uic: string): Observable<any> {
+  /*getJOPESUIC(uic: string): Observable<any> {
     let fullDomain: string = this.identifyWSServer() + `/GetJOPESUIC`;
     const params = new HttpParams().set('id', this.ds.getPassKey()).set('uic', uic);
     return (this.http.get<any>(fullDomain, {params})
       .pipe(catchError(WebapiService.errorHandler)));
-  }
+  }*/
 
   getJOPESPUIC(uic: string): Observable<any> {
     let fullDomain: string = this.identifyWSServer() + `/GetJOPESPUIC`;
@@ -449,12 +449,12 @@ export class WebapiService {
       .pipe(catchError(WebapiService.errorHandler)));
   }
 
-  getMOBUIC(uic: string): Observable<any> {
+  /*getMOBUIC(uic: string): Observable<any> {
     let fullDomain: string = this.identifyWSServer() + `/GetMOBUIC`;
     const params = new HttpParams().set('id', this.ds.getPassKey()).set('uic', uic);
     return (this.http.get<any>(fullDomain, {params})
       .pipe(catchError(WebapiService.errorHandler)));
-  }
+  }*/
 
   getMMSUICMess(uic: string): Observable<any> {
     let fullDomain: string = this.identifyWSServer() + `/GetMMSUICMess`;
@@ -463,12 +463,12 @@ export class WebapiService {
       .pipe(catchError(WebapiService.errorHandler)));
   }
 
-  getMDISUIC(uic: string): Observable<any> {
+  /*getMDISUIC(uic: string): Observable<any> {
     let fullDomain: string = this.identifyWSServer() + `/GetMDISUIC`;
     const params = new HttpParams().set('id', this.ds.getPassKey()).set('uic', uic);
     return (this.http.get<any>(fullDomain, {params})
       .pipe(catchError(WebapiService.errorHandler)));
-  }
+  }*/
 
   getITAP(uic: string): Observable<any> {
     let fullDomain: string = this.identifyWSServer() + `/GetITAP`;

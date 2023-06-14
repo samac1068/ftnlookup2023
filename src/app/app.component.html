@@ -1,4 +1,10 @@
-<div class="main">
+<div class="main" *ngIf="glbErrMsg.length == 0">
   <app-banner></app-banner>
   <app-tabcontainer *ngIf=enabled></app-tabcontainer>
+</div>
+
+<div class="errmsg" *ngIf="glbErrMsg.length > 0">
+  <span style="font-size: 30px; text-decoration: underline;">FTN/UIC Lookup</span>
+  <br/><br/>
+  {{ glbErrMsg }}
 </div>

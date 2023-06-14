@@ -29,8 +29,6 @@ export class ReadyDashComponent implements OnInit {
   timeoutCounter: number = 0;
   localTimer: any;
 
-  blah: boolean = false;    // Used for testing only
-
   constructor(public ds: DatastoreService, private api: WebapiService, private comm: CommService, private conlog: ConlogService) { }
 
   ngOnInit(): void {
@@ -96,9 +94,10 @@ export class ReadyDashComponent implements OnInit {
     }
 
     // Now get content specific data based on the UIC saved.
-    if (this.ds.tabs[this.ftn_uic]['READY'].length > 0)
+    if (this.ds.tabs[this.ftn_uic]['READY'].length > 0) {
+      this.curUICCnt = 0;
       this.getAllUICData();
-    else
+    } else
       this.readyTabLoaded = true;
     /*} else {
       console.log("There are no rec id available to search for. Ending attempt for readiness tab");
@@ -109,9 +108,11 @@ export class ReadyDashComponent implements OnInit {
   getAllUICData() {
     this.conlog.log("getAllUICData");
     if(this.curUICCnt < this.ds.tabs[this.ftn_uic]['READY'].length) {
-      let uic: string = this.ds.tabs[this.ftn_uic]['READY'][this.curUICCnt].uic.substr(0, 4) + this.uicSuffix[this.suffixIndex];
+      let uic: string = this.ds.tabs[this.ftn_uic]['READY'][this.curUICCnt].uic.substring(0, 3) + this.uicSuffix[this.suffixIndex];
 
       this.conlog.log("processing UIC: " + uic + "(" + this.curUICCnt + ")");
+      // Post a message on what UIC we are checking for.
+      this.userInfoText = "Searching for UIC: " + uic.toUpperCase();
       this.api.getUIC(uic.toUpperCase()).pipe()
         .subscribe(result => {
           if(result[0] != undefined){

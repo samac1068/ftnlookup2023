@@ -6,7 +6,6 @@ import { ConfirmDialogService } from './dialogs/confirm-dialog/confirm-dialog.se
 import { MatDialog } from '@angular/material/dialog';
 import { LogConsoleDialogComponent } from './modules/conlog/log-console-dialog/log-console-dialog.component';
 import { ConlogService } from './modules/conlog/conlog.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +19,8 @@ export class AppComponent {
   inbound: any = {ftn: null, uic: null};
   isConsoleOpen: boolean = false;
   dialogQuery: any;
+  dataErrMsg: any = [];
+  glbErrMsg: string = "";
 
   // Adding global host listener for single global keyboard command of CTRL+\
   @HostListener('document:keypress', ['$event'])
@@ -53,60 +54,83 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    this.conlog.log("ngOnInit");
+
     //During initialization, need to identify which server is hosting the latest API.
-    this.conlog.log("ngOnInit - Determine where we are");
+    this.inbound.ftn = this.processInboundData(this.inbound.ftn);
+    this.inbound.uic = this.processInboundData(this.inbound.uic);
+
+    // Set up for local execution and development only (This is automatically ignored if data is passed to the querystring)
+    //this.ds.devMode = true;     // This is for debugging without running locally only
+    if (this.inbound.ftn == null && this.inbound.uic == null && this.ds.devMode) {
+      //this.inbound.ftn = 'DEMO1201000';  // DEMO1111782  DEMO1141930  DEMO1201038  DEMO1171444 DEMO1201000
+      this.inbound.uic = 'ZPFLAA'; // Z48JAA
+    } else this.ds.devMode = false;
 
     // Validate the provided values.
     this.conlog.log("Validation Start - InBound FTN is [" + this.inbound.ftn + "] | UIC is [" + this.inbound.uic + "]");
-    if(this.inbound.ftn != null) {
+    if(this.inbound.ftn != null) {  // Check FTN
       this.params.ftn = (this.inbound.ftn.length == 11) ? this.inbound.ftn : null;
+      if(this.params.ftn == null && !this.ds.devMode)
+        this.dataErrMsg.push("The FTN is not 11 characters. Please verify and try again.");
     }
-    if(this.inbound.uic != null) {
+
+    if(this.inbound.uic != null) {  // Check UIC
       this.params.uic = (this.inbound.uic.length >= 4 && this.inbound.uic.length <= 6) ? this.inbound.uic : null;
+      if(this.params.uic == null && !this.ds.devMode)
+        this.dataErrMsg.push("The UIC is not between 4 and 6 characters. Please verify and try again.");
     }
 
     this.conlog.log("Validation Complete - PARAMS FTN is [" + this.params.ftn + "] | UIC is [" + this.params.uic + "]");
 
     // Set the development mode
-    if(this.params.ftn != null || this.params.uic != null) this.ds.devMode = false;   // Set dev mode to false if anything is passed
-    this.conlog.log("Values coming from QueryRequest - FTN: " + this.params.ftn + " UIC: " + this.params.uic);
+    //if(this.params.ftn != null || this.params.uic != null) this.ds.devMode = false;   // Set dev mode to false if anything is passed
+    this.conlog.log("Values to be used - FTN: " + this.params.ftn + " or UIC: " + this.params.uic);
 
     if (this.ds.getWSAPI() == '') {
       this.getSystemConfig();
       this.validateAPI();
 
-      /*TODO*/
-      // During initialization, also need to obtain the authorization token that will be used for all communications (Still not working correctly)
+      /* TODO  -  During initialization, also need to obtain the authorization token that will be used for all communications (Still not working correctly) */
       //this.grabToken();
-      //this.ds.devMode = true;     // This is for debugging without running locally only
 
-      if (this.params.ftn == null && this.params.uic == null && !this.ds.devMode) {
-        alert("FATAL ERROR: System Halted! Missing critical FTN/UIC information. Return to MDIS and try again.");
+      if(this.dataErrMsg.length > 0) {
+        alert(this.dataErrMsg.join("\r\n"));
+      } else if (this.params.ftn == null && this.params.uic == null && !this.ds.devMode) {
+        this.glbErrMsg = "FATAL ERROR: System Halted! Missing critical FTN/UIC data. Return to MDIS and try again.";
       } else {
-        // Set up for local execution and development only (This is automatically ignored if data is passed to the querystring)
-        if (this.params.ftn == null && this.params.uic == null && this.ds.devMode) {
-          this.params.ftn = 'DEMO1201038';  // DEMO1111782  DEMO1141930  DEMO1201038  DEMO1171444
-          //this.params.uic = 'ZPFLAA'; // Z48JAA
-        } else this.ds.devMode = false;
-
-        // Are we running locally or on a server?  On a server, then devMode should be false regardless if testing
+        // We have the information we need, and it is formatted correctly.
         this.conlog.log("Dev Mode: " + this.ds.devMode + ", FTN:" + this.params.ftn + ", UIC:" + this.params.uic);
 
         // Establish AppMode - FTN is the default mode if both are provided
        (this.params.uic != null && this.params.ftn == null) ? this.ds.appMode = 'uic' : this.ds.appMode = 'ftn';
-      }
 
-      // Grab the querystring information, this should be the FTN or UIC
-      if (this.params.ftn != null) {
-        this.ds.tabs[this.params.ftn] = {};
-        this.ds.tabs[this.params.ftn] = {ftn_uic: this.params.ftn, type: 'ftn', index: 0};
-      } else if (this.params.uic != null) {
-        this.ds.tabs[this.params.uic] = {};
-        this.ds.tabs[this.params.uic] = {ftn_uic: this.params.uic, type: 'uic', index: 0};
-      } else {
-        alert("FATAL ERROR: Missing critical FTN/UIC data.  Unable to continue.");
+        // Grab the querystring information, this should be the FTN or UIC
+        if (this.ds.appMode == 'ftn') {
+          this.ds.tabs[this.params.ftn] = {};
+          this.ds.tabs[this.params.ftn] = {ftn_uic: this.params.ftn, type: 'ftn', index: 0};
+        } else if (this.ds.appMode == 'uic') {
+          this.ds.tabs[this.params.uic] = {};
+          this.ds.tabs[this.params.uic] = {ftn_uic: this.params.uic, type: 'uic', index: 0};
+        } else {
+          this.glbErrMsg = "FATAL ERROR: Data Failure. Unable to continue. Return to MDIS and try again.";
+        }
       }
     }
+  }
+
+  processInboundData(data: string): any{
+    this.conlog.log("processInboundData - incoming - " + data);
+
+    if(data == null) return null;
+
+    if(data.indexOf("&") > -1 || data.indexOf("=") > -1) {
+      let dataEle: string[] = data.split("&");
+      data = (dataEle[0].indexOf("=") > -1) ? dataEle[0].substring(dataEle[0].indexOf("=")+1) : dataEle[0];
+    }
+
+    this.conlog.log("processInboundData - outgoing - " + data);
+    return data;
   }
 
   getSystemConfig() {

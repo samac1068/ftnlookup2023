@@ -50,7 +50,7 @@ export class JopesDashComponent implements OnInit {
     //this.unsortedArr = this.rowData;
     //this.processJopesData();
 
-    this.api.getJOPES(this.ftn_uic).subscribe(result => {
+    this.api.getFTNUICJOPES(this.ftn_uic).subscribe(result => {
       if(result.indexOf("Execution Timeout Expired") == -1) {
         this.unsortedArr = result;
         this.processJopesData();

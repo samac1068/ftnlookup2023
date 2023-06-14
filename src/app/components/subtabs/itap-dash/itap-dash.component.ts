@@ -12,7 +12,7 @@ import {ConlogService} from '../../../modules/conlog/conlog.service';
 export class ItapDashComponent implements OnInit {
   @Input() ftn_uic: string;
   userInfoText: string
-  userOrderInfo: string = "No Records Found";
+  userOrderInfo: string = "No ITAP Data Found";
   uicStr: string;
   columnDefs: any = [];
 

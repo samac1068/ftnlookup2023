@@ -17,8 +17,9 @@ export class JcrmDashComponent implements OnInit {
 
   dataChecked: any = {req: false, fpnoms: false, jfpnoms: false, nonstandard: false, adhoc: false };
   curstatus: string = 'Loading...';
-  hasData: boolean = false;
-  podLoaded: boolean = false;
+  jcrmHasData: boolean = false;
+  jcrmPodsLoaded: boolean = false;
+  dataIndex: number = -1;
 
   constructor(private ds: DatastoreService, private api: WebapiService, private conlog: ConlogService) { }
 
@@ -31,9 +32,39 @@ export class JcrmDashComponent implements OnInit {
     this.ds.tabs[this.ftn_uic]["JCRMAdHoc"] = [];
 
     // When called, let's get the information
+    this.processNextPodItem();
+  }
+
+  processNextPodItem(){
+    this.dataIndex++;
+    if(this.dataIndex < 5) {
+      switch(this.dataIndex){
+        case 0:
+          this.getRequirements();
+          break;
+        case 1:
+          this.getFPNoms();
+          break;
+        case 2:
+          this.getJFPNoms();
+          break;
+        case 3:
+          this.getNonstandard();
+          break;
+        case 4:
+          this.getAdhoc();
+          break;
+      }
+    } else {
+      this.jcrmPodsLoaded = true;
+      this.multiDataValidation();
+    }
+  }
+
+  getRequirements(){
     this.api.getJCRMRequirement(this.ftn_uic)
       .subscribe((results) => {
-        if(results != null) {
+        if(results.length > 0) {
           results[0].dateApproved = this.ds.setDateFormatFromString(results[0].dateApproved, 'dd MMM yy');
           results[0].endDate = this.ds.setDateFormatFromString(results[0].endDate, 'dd MMM yy');
           results[0].modifiedDate = this.ds.setDateFormatFromString(results[0].modifiedDate, 'dd MMM yy');
@@ -42,12 +73,14 @@ export class JcrmDashComponent implements OnInit {
         }
 
         this.dataChecked.req = true;
-        this.multiDataValidation();
+        this.processNextPodItem();
       });
+  }
 
+  getFPNoms() {
     this.api.getJCRMFPNoms(this.ftn_uic)
       .subscribe((results) => {
-        if(results != null) {
+        if(results.length > 0) {
           for (let k = 0; k < results.length; k++) {
             results[k].aad = this.ds.setDateFormatFromString(results[k].aad, 'dd MMM yy');
             results[k].alertDate = this.ds.setDateFormatFromString(results[k].alertDate, 'dd MMM yy');
@@ -72,12 +105,14 @@ export class JcrmDashComponent implements OnInit {
         }
 
         this.dataChecked.fpnoms = true;
-        this.multiDataValidation();
+        this.processNextPodItem();
       });
+  }
 
+  getJFPNoms() {
     this.api.getJCRMJFPNoms(this.ftn_uic)
       .subscribe((results) => {
-        if(results != null) {
+        if(results.length > 0) {
           for (let j = 0; j < results.length; j++) {
             results[j].aad = this.ds.setDateFormatFromString(results[j].aad, 'dd MMM yy');
             results[j].alertDate = this.ds.setDateFormatFromString(results[j].alertDate, 'dd MMM yy');
@@ -99,26 +134,31 @@ export class JcrmDashComponent implements OnInit {
         }
 
         this.dataChecked.jfpnoms = true;
+        this.processNextPodItem();
       });
+  }
 
+  getNonstandard() {
     this.api.getJCRMNonStandard(this.ftn_uic)
       .subscribe((results) => {
-        if(results != null) {
+        if(results.length > 0) {
           this.ds.tabs[this.ftn_uic]["JCRMNonStandard"] = results;
         }
 
         this.dataChecked.nonstandard = true;
+        this.processNextPodItem();
       });
+  }
 
+  getAdhoc() {
     this.api.getJCRMAdHoc(this.ftn_uic)
       .subscribe((results) => {
-        if(results != null) {
+        if(results.length > 0) {
           this.ds.tabs[this.ftn_uic]["JCRMAdHoc"] = results;
         }
 
         this.dataChecked.adhoc = true;
-        this.podLoaded = true;
-        this.multiDataValidation();
+        this.processNextPodItem();
       });
   }
 
@@ -130,9 +170,9 @@ export class JcrmDashComponent implements OnInit {
         || this.ds.tabs[this.ftn_uic]['JCRMNonStandard'].length > 0
         || this.ds.tabs[this.ftn_uic]['JCRMAdHoc'].length > 0) {
         this.conlog.log("There is some JCRM data");
-        this.hasData = true;
+        this.jcrmHasData = true;
       } else {
-        this.hasData = false;
+        this.jcrmHasData = false;
         this.curstatus = 'No Data Found';
         this.conlog.log("No JCRM Data Found");
       }

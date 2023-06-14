@@ -12,6 +12,7 @@ import {ConlogService} from '../../../modules/conlog/conlog.service';
 export class OrdersDashComponent implements OnInit {
   @Input() ftn_uic: string = "";
 
+  ordersDataRecd: any = {recid: false, staffing: false, history: false, histIndex: 0}
   orderStaffing: any = [];
   ordersArr: any = [];
 
@@ -26,68 +27,74 @@ export class OrdersDashComponent implements OnInit {
       this.ds.tabs[this.ftn_uic]["ORDERS_RECID"] = [];
       this.ds.tabs[this.ftn_uic]["ORDERS_STAFFING"] = [];
       this.ds.tabs[this.ftn_uic].ordersTabLoaded = false;
-
       this.ordersTabLoaded = false;
-      this.ordersNoRecords = true;
-
+      this.ordersNoRecords = false;
       this.processOrderRecIDData();
   }
 
   processOrderRecIDData() {
     if(this.ds.tabs[this.ftn_uic]["ORDERS_RECID"].length == 0) {
-      this.api.getOrderRecID(this.ftn_uic, this.ds.tabs[this.ftn_uic].type).subscribe((results) => {
-        if (results != null && results.indexOf("Execution Timeout Expired") == -1) {
-          this.ds.tabs[this.ftn_uic]["ORDERS_RECID"] = this.ordersArr = results;
-
-          // Get drilldown data for each rec id
-          for(let l = 0; l < this.ds.tabs[this.ftn_uic]["ORDERS_RECID"].length; l++) {
-            let rec = this.ds.tabs[this.ftn_uic]["ORDERS_RECID"][l];
-            rec["HISTORY"] = [];
-            rec["HistoryLoaded"] = false;
-
-            this.api.getOrderHistory(rec["REC_ID"]).subscribe((history) => {
-              if(history != null){
-                rec["HISTORY"] = history;
-                rec["HistoryLoaded"] = true;
-              }
-
-              // Only indicate that all is done IF all are done.
-              if(this.verifyAllHistoryLoaded()) {
-                this.completeTabProcess();
-              }
-            });
+      this.api.getOrderRecID(this.ftn_uic, this.ds.tabs[this.ftn_uic].type)
+        .subscribe((results) => {
+          this.conlog.log("ProcessOrderRecIDData - Returned Count is: " + results.length);
+          if (results.indexOf("Execution Timeout Expired") == -1) {
+            if(results[0] != undefined) {
+              this.ds.tabs[this.ftn_uic]["ORDERS_RECID"] = this.ordersArr = results;
+              this.ordersDataRecd.recid = true;
+              if(this.ordersArr.length > 0) this.getOrdersHistory(); else this.ordersDataRecd.history = true;
+              if(this.ds.appMode == 'ftn') this.getOrdersStaffing(); else this.ordersDataRecd.staffing = true;
+            } else this.completeTabProcess();
+          } else {
+            this.ordersArr = [];
+            this.ds.tabs[this.ftn_uic]["ORDERS_RECID"] = "Execution Timeout Expired";
+            this.completeTabProcess();
           }
-        } else {
-          this.ordersArr = [];
-          this.ds.tabs[this.ftn_uic]["ORDERS_RECID"] = "Execution Timeout Expired";
-          this.completeTabProcess();
-        }
-      });
-
-      //Collect the Orders Staffing Information - If any
-      this.api.getOrderStaffingRecID(this.ftn_uic).subscribe((results) => {
-        this.ds.tabs[this.ftn_uic]["ORDERS_STAFFING"] = results;
-      });
-
+      })
     } else this.completeTabProcess();
   }
 
-  verifyAllHistoryLoaded(){
-    let doneRecCount = 0;
+  getOrdersStaffing(){
+    this.api.getOrderStaffingRecID(this.ftn_uic).subscribe((results) => {
+      if (results[0] != undefined) {
+        this.ds.tabs[this.ftn_uic]["ORDERS_STAFFING"] = results;
+        this.ordersDataRecd.staffing = true;
+        this.verifyAllDataLoaded();
+      }
+    });
+  }
 
-    for(let r = 0; r < this.ds.tabs[this.ftn_uic]["ORDERS_RECID"].length; r++) {
-      if(this.ds.tabs[this.ftn_uic]["ORDERS_RECID"][r]["HistoryLoaded"])
-        doneRecCount++;
+  getOrdersHistory(){
+    // Get drilldown data for each rec id
+    if(this.ordersDataRecd.histIndex < this.ds.tabs[this.ftn_uic]["ORDERS_RECID"].length) {
+      let rec = this.ds.tabs[this.ftn_uic]["ORDERS_RECID"][this.ordersDataRecd.histIndex];
+      rec["HISTORY"] = [];
+      rec["HistoryLoaded"] = false;
+
+      // Grab the history for this recID
+      this.api.getOrderHistory(rec["REC_ID"]).subscribe((history) => {
+        if (history != null) {
+          rec["HISTORY"] = history;
+          rec["HistoryLoaded"] = true;
+          this.ordersDataRecd.histIndex++;
+          this.getOrdersHistory();
+        }
+      });
+    } else {
+      this.ordersDataRecd.history = true
+      this.verifyAllDataLoaded();
     }
+  }
 
-    return doneRecCount == this.ds.tabs[this.ftn_uic]["ORDERS_RECID"].length;
+  verifyAllDataLoaded() {
+    if(this.ordersDataRecd.staffing && this.ordersDataRecd.history) {
+      this.completeTabProcess();
+    }
   }
 
   completeTabProcess() {
     this.ordersTabLoaded = this.ds.tabs[this.ftn_uic].ordersTabLoaded = true;
     this.ordersNoRecords = (this.ordersArr.length == 0);
-    this.conlog.log("orders has been loaded with " + ((this.ordersNoRecords) ? "no records." : "records."));
-
+    this.conlog.log("Orders have been loaded with " + ((this.ordersNoRecords) ? "no records." : "records."));
     this.orderStaffing = this.ds.tabs[this.ftn_uic]["ORDERS_STAFFING"];
     this.ordersTimeoutExpired = (this.ds.tabs[this.ftn_uic]["ORDER_RECID"] == "Execution Timeout Expired");
   }

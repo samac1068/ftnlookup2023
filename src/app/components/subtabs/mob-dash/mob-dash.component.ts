@@ -31,9 +31,8 @@ export class MobDashComponent implements OnInit {
   processTabContent() {
     // Load this if we don't have any data
     if(this.ds.tabs[this.ftn_uic]["MOB"].length == 0) {
-      this.api.getMOB(this.ftn_uic)
+      this.api.getFTNUICMOB(this.ftn_uic)
         .subscribe(result => {
-
         // Test for Timeout
         if (result != null && result.indexOf("Execution Timeout Expired") == -1) {
 

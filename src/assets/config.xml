@@ -1,5 +1,5 @@
 <systems>
-  <system type="local" path="http://localhost:61502/api/LKUP" active="true"/>
-  <system type="demo" path="https://mobhigh.mkgcs.com/MOBAPI/api/LKUP" active="false"/>
+  <system type="local" path="http://localhost:61502/api/LKUP" active="false"/>
+  <system type="demo" path="https://mobhigh.mkgcs.com/MOBAPI/api/LKUP" active="true"/>
   <system type="prod" path="https://mobcop.aoc.army.pentagon.smil.mil/MOBAPI/LKUP" active="false"/>
 </systems>

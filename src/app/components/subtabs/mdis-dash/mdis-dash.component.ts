@@ -30,8 +30,7 @@ export class MdisDashComponent implements OnInit {
   processTabContent() {
     // Load this if we don't have any data
     if(this.ds.tabs[this.ftn_uic]["MDIS"].length == 0) {
-      this.api.getFTNMDIS(this.ftn_uic).subscribe(result => {
-
+      this.api.getFTNUICMDIS(this.ftn_uic).subscribe(result => {
         // Test for Timeout
         if (result != null && result.indexOf("Execution Timeout Expired") == -1) {
           // Need to adjust the date field
