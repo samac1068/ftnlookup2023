@@ -61,10 +61,10 @@ export class AppComponent {
     this.inbound.uic = this.processInboundData(this.inbound.uic);
 
     // Set up for local execution and development only (This is automatically ignored if data is passed to the querystring)
-    //this.ds.devMode = true;     // This is for debugging without running locally only
+    this.ds.devMode = true;     // This is for debugging without running locally only
     if (this.inbound.ftn == null && this.inbound.uic == null && this.ds.devMode) {
-      //this.inbound.ftn = 'DEMO1201000';  // DEMO1111782  DEMO1141930  DEMO1201038  DEMO1171444 DEMO1201000
-      this.inbound.uic = 'ZPFLAA'; // Z48JAA
+      this.inbound.ftn = 'DEMO1201038';  // DEMO1111782  DEMO1141930  DEMO1201038  DEMO1171444 DEMO1201000
+      //this.inbound.uic = 'ZPFLAA'; // Z48JAA
     } else this.ds.devMode = false;
 
     // Validate the provided values.

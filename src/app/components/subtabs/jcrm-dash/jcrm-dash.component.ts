@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import { MatAccordion } from '@angular/material/expansion';
+import {MatAccordion} from '@angular/material/expansion';
 import {DatastoreService} from '../../../services/datastore.service';
 import {WebapiService} from '../../../services/webapi.service';
 import {ConlogService} from '../../../modules/conlog/conlog.service';
@@ -15,17 +15,18 @@ export class JcrmDashComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('podcontainer') podContainer: ElementRef;
 
-  dataChecked: any = {req: false, fpnoms: false, jfpnoms: false, nonstandard: false, adhoc: false };
+  dataChecked: any = {req: false, fpnoms: false, jfpnoms: false, nonstandard: false, adhoc: false};
   curstatus: string = 'Loading...';
   jcrmHasData: boolean = false;
   jcrmPodsLoaded: boolean = false;
   dataIndex: number = -1;
 
-  constructor(private ds: DatastoreService, private api: WebapiService, private conlog: ConlogService) { }
+  constructor(private ds: DatastoreService, private api: WebapiService, private conlog: ConlogService) {
+  }
 
   ngOnInit(): void {
     //Initialize all storage areas
-    this.ds.tabs[this.ftn_uic]["JCRMReq"] = {};
+    this.ds.tabs[this.ftn_uic]["JCRMReq"] = [];
     this.ds.tabs[this.ftn_uic]["JCRMFPNoms"] = [];
     this.ds.tabs[this.ftn_uic]["JCRMJFPNoms"] = [];
     this.ds.tabs[this.ftn_uic]["JCRMNonStandard"] = [];
@@ -35,10 +36,10 @@ export class JcrmDashComponent implements OnInit {
     this.processNextPodItem();
   }
 
-  processNextPodItem(){
+  processNextPodItem() {
     this.dataIndex++;
-    if(this.dataIndex < 5) {
-      switch(this.dataIndex){
+    if (this.dataIndex < 5) {
+      switch (this.dataIndex) {
         case 0:
           this.getRequirements();
           break;
@@ -61,15 +62,15 @@ export class JcrmDashComponent implements OnInit {
     }
   }
 
-  getRequirements(){
+  getRequirements() {
     this.api.getJCRMRequirement(this.ftn_uic)
       .subscribe((results) => {
-        if(results.length > 0) {
+        if (results.length > 0) {
           results[0].dateApproved = this.ds.setDateFormatFromString(results[0].dateApproved, 'dd MMM yy');
           results[0].endDate = this.ds.setDateFormatFromString(results[0].endDate, 'dd MMM yy');
           results[0].modifiedDate = this.ds.setDateFormatFromString(results[0].modifiedDate, 'dd MMM yy');
           results[0].startDate = this.ds.setDateFormatFromString(results[0].startDate, 'dd MMM yy');
-          this.ds.tabs[this.ftn_uic]["JCRMReq"] = results[0];
+          this.ds.tabs[this.ftn_uic]["JCRMReq"] = results;
         }
 
         this.dataChecked.req = true;
@@ -80,7 +81,7 @@ export class JcrmDashComponent implements OnInit {
   getFPNoms() {
     this.api.getJCRMFPNoms(this.ftn_uic)
       .subscribe((results) => {
-        if(results.length > 0) {
+        if (results.length > 0) {
           for (let k = 0; k < results.length; k++) {
             results[k].aad = this.ds.setDateFormatFromString(results[k].aad, 'dd MMM yy');
             results[k].alertDate = this.ds.setDateFormatFromString(results[k].alertDate, 'dd MMM yy');
@@ -112,7 +113,7 @@ export class JcrmDashComponent implements OnInit {
   getJFPNoms() {
     this.api.getJCRMJFPNoms(this.ftn_uic)
       .subscribe((results) => {
-        if(results.length > 0) {
+        if (results.length > 0) {
           for (let j = 0; j < results.length; j++) {
             results[j].aad = this.ds.setDateFormatFromString(results[j].aad, 'dd MMM yy');
             results[j].alertDate = this.ds.setDateFormatFromString(results[j].alertDate, 'dd MMM yy');
@@ -141,7 +142,7 @@ export class JcrmDashComponent implements OnInit {
   getNonstandard() {
     this.api.getJCRMNonStandard(this.ftn_uic)
       .subscribe((results) => {
-        if(results.length > 0) {
+        if (results.length > 0) {
           this.ds.tabs[this.ftn_uic]["JCRMNonStandard"] = results;
         }
 
@@ -153,7 +154,7 @@ export class JcrmDashComponent implements OnInit {
   getAdhoc() {
     this.api.getJCRMAdHoc(this.ftn_uic)
       .subscribe((results) => {
-        if(results.length > 0) {
+        if (results.length > 0) {
           this.ds.tabs[this.ftn_uic]["JCRMAdHoc"] = results;
         }
 
@@ -163,8 +164,8 @@ export class JcrmDashComponent implements OnInit {
   }
 
   multiDataValidation() {
-    if(this.ds.isAllObjTrue(this.dataChecked))
-      if(this.ds.tabs[this.ftn_uic]['JCRMJFPNoms'].length > 0
+    if (this.ds.isAllObjTrue(this.dataChecked)) {
+      if (this.ds.tabs[this.ftn_uic]['JCRMJFPNoms'].length > 0
         || this.ds.tabs[this.ftn_uic]['JCRMFPNoms'].length > 0
         || this.ds.tabs[this.ftn_uic]['JCRMReq'].length > 0
         || this.ds.tabs[this.ftn_uic]['JCRMNonStandard'].length > 0
@@ -178,3 +179,4 @@ export class JcrmDashComponent implements OnInit {
       }
     }
   }
+}

@@ -54,17 +54,18 @@ export class OrdersDashComponent implements OnInit {
   }
 
   getOrdersStaffing(){
+    this.conlog.log("getOrdersStaffing");
     this.api.getOrderStaffingRecID(this.ftn_uic).subscribe((results) => {
       if (results[0] != undefined) {
         this.ds.tabs[this.ftn_uic]["ORDERS_STAFFING"] = results;
-        this.ordersDataRecd.staffing = true;
-        this.verifyAllDataLoaded();
       }
+      this.ordersDataRecd.staffing = true;
+      this.verifyAllDataLoaded();
     });
   }
 
   getOrdersHistory(){
-    // Get drilldown data for each rec id
+    this.conlog.log("getOrdersHistory - recid: " + this.ordersDataRecd.histIndex + " (" + this.ds.tabs[this.ftn_uic]["ORDERS_RECID"].length + ")" );
     if(this.ordersDataRecd.histIndex < this.ds.tabs[this.ftn_uic]["ORDERS_RECID"].length) {
       let rec = this.ds.tabs[this.ftn_uic]["ORDERS_RECID"][this.ordersDataRecd.histIndex];
       rec["HISTORY"] = [];

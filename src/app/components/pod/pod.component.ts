@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
 import {DatastoreService} from '../../services/datastore.service';
 import {ConfirmDialogService} from '../../dialogs/confirm-dialog/confirm-dialog.service';
 import {CommService} from '../../services/comm.service';
+import {ConlogService} from "../../modules/conlog/conlog.service";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class PodComponent implements OnInit, AfterViewInit {
   podTitleStyle: any;
   podContentStyle: any;
   tempBoxDim: any = {};
+  podsVisible: boolean = false;
 
   podArr: any = [];
 
@@ -46,7 +48,7 @@ export class PodComponent implements OnInit, AfterViewInit {
     {title: 'Comments', name: 'comments', atMax: false}
   ];
 
-  constructor(private ds: DatastoreService, private dialog: ConfirmDialogService, private comm: CommService) { }
+  constructor(private ds: DatastoreService, private dialog: ConfirmDialogService, private comm: CommService, private conlog: ConlogService) { }
 
   ngOnInit(): void { }
 
@@ -70,6 +72,7 @@ export class PodComponent implements OnInit, AfterViewInit {
   }
 
   calculatePageDims() {
+    this.conlog.log("calculatePageDimensionsForPods");
     // Set up and store the size of the available window
     this.ds.windowDims.width = window.innerWidth * .99;
     this.ds.windowDims.height = window.innerHeight - 250;
@@ -99,6 +102,7 @@ export class PodComponent implements OnInit, AfterViewInit {
       'height': (this.divPodDim.height - this.divPodDim.titleHeight) + 'px', 'position': 'absolute', 'overflow': 'auto' };
 
     this.pods = this.podArr;
+    this.podsVisible = true;
   }
 
   activateSelected(index: number) {
