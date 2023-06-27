@@ -17,7 +17,7 @@ export class NotesComponent implements OnInit {
 
   ngOnInit(): void {
     // Now populate what is needed for the pod.
-    this.podData = this.ds.tabs[this.ftn_uic]["JCRMReq"];
+    this.podData = this.ds.tabs[this.ftn_uic]["JCRMReq"][0];
     this.hasData = (this.ds.tabs[this.ftn_uic]["JCRMReq"].length > 0);
     this.conlog.log("subtab: notes - loaded");
   }
