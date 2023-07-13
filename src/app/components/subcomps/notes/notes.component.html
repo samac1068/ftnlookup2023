@@ -1,16 +1,16 @@
 <div id="notebody" *ngIf="hasData">
   <table style="width: 100%; height:100%">
-    <tr class="borders"><td class="title">Situation</td><td>{{ podData.situation}}</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true" [ngStyle]="{'color': (podData.situation != null? 'red': 'black')}"></i></td></tr>
-    <tr><td class="title">Mission</td><td>{{ podData.mission}}</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true" [ngStyle]="{'color': (podData.mission != null? 'red': 'black')}"></i></td></tr>
-    <tr><td class="title">Capabilities</td><td>{{ podData.capabilities }}</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true" [ngStyle]="{'color': (podData.capabilities != null? 'red': 'black')}"></i></td></tr>
-    <tr><td class="title">Specialized Reqs</td><td>{{ podData.specializedRequirement }}</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true" [ngStyle]="{'color': (podData.specializedRequirement != null? 'red': 'black')}"></i></td></tr>
-    <tr><td class="title">JRC Matrix Notes</td><td>&nbsp;</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true"></i></td></tr>
-    <tr><td class="title">JRC Clarification Notes</td><td>{{ podData.bosMatrixNotes }}</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true" [ngStyle]="{'color': (podData.bosMatrixNotes != null? 'red': 'black')}"></i></td></tr>
-    <tr><td class="title">AO Comments</td><td>&nbsp;</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true"></i></td></tr>
-    <tr><td class="title">FTN Issues</td><td>&nbsp;</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true"></i></td></tr>
-    <tr><td class="title">Nomenclature Description</td><td>{{ podData.nomenclatureDesc }}</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true" [ngStyle]="{'color': (podData.nomenclatureDesc != null? 'red': 'black')}"></i></td></tr>
-    <tr><td class="title">Risk</td><td>{{ podData.riskName }}</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true" [ngStyle]="{'color': (podData.riskName != null? 'red': 'black')}"></i></td></tr>
-    <tr><td class="title">Risk Justification</td><td>{{ podData.riskJustification }}</td><td class="expander"><i class="fa fa-clipboard" aria-hidden="true" [ngStyle]="{'color': (podData.riskJustification != null? 'red': 'black')}"></i></td></tr>
+    <tr class="borders"><td class="title">Situation</td><td>{{ podData.situation}}</td></tr>
+    <tr><td class="title">Mission</td><td>{{ podData.mission}}</td></tr>
+    <tr><td class="title">Capabilities</td><td>{{ podData.capabilities }}</td></tr>
+    <tr><td class="title">Specialized Reqs</td><td>{{ podData.specializedRequirement }}</td></tr>
+    <tr><td class="title">JRC Matrix Notes</td><td>&nbsp;</td></tr>
+    <tr><td class="title">JRC Clarification Notes</td><td>{{ podData.bosMatrixNotes }}</td></tr>
+    <tr><td class="title">AO Comments</td><td>&nbsp;</td></tr>
+    <tr><td class="title">FTN Issues</td><td>&nbsp;</td></tr>
+    <tr><td class="title">Nomenclature Description</td><td>{{ podData.nomenclatureDesc }}</td></tr>
+    <tr><td class="title">Risk</td><td>{{ podData.riskName }}</td></tr>
+    <tr><td class="title">Risk Justification</td><td>{{ podData.riskJustification }}</td></tr>
   </table>
 </div>
 <div *ngIf="!hasData" id="divNoRecords">
