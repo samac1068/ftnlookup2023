@@ -3,7 +3,8 @@ import {DatastoreService} from '../../../services/datastore.service';
 import {CommService} from '../../../services/comm.service';
 import {WebapiService} from '../../../services/webapi.service';
 import {ConlogService} from '../../../modules/conlog/conlog.service';
-
+// @ts-ignore
+import { String } from '../../../ptypes/string.extensions';
 @Component({
   selector: 'app-mms-dash',
   templateUrl: './mms-dash.component.html',
@@ -72,6 +73,26 @@ export class MmsDashComponent implements OnInit, AfterViewInit {
     this.verifyReady();
   }
 
+ /* formatDTGInfo(data?: string): string {
+    // This is used to just format the DTG data like what is done for the message
+    let dtstr: string = "";
+
+    if(data != undefined) {
+      if(data.toLowerCase().indexOf("z") > -1) {
+        // The ZULU indicator is in the string, needs to convert to standard date format  ddhhmmZMMMyy and return hh:mm dd MMM yy
+        //let pat: RegExp = /Z/gi
+        //data.replace(pat, "");
+        //dtstr = data.substring(2, 4) + ":" + data.substring(4, 6);
+        //dtstr += " " + data.substring(0, 2) + " " + data.substring(7, 10) + " " + data.substring(10);
+        dtstr = data.substr(2, 2) + ":" + data.substr(4, 2);
+        dtstr += data.substr(0, 2) + " " + data.substr(7, 3) + " " + data.substr(10);
+      } else {
+        dtstr = data; //new Date(data).toUTCString();
+      }
+    }
+
+    return dtstr;
+  }*/
   generateColLink(value: string) {
     // If the ID field, then create a link for this value
     return window.location.protocol + "//"  + window.location.hostname + this.MMSURL + value;

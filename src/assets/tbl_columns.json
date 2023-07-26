@@ -211,7 +211,7 @@
   ],
   "mms": [
     {"headerName": "ID", "field": "ID", "width": 100},
-    {"headerName": "DTG", "field": "DTG", "width": 200},
+    {"headerName": "DTG", "field": "DTG", "width": 260},
     {"headerName": "ORIGINATOR", "field": "Originator", "width": 400},
     {"headerName": "SUBJECT", "field": "Subject", "width": -1}
   ],
